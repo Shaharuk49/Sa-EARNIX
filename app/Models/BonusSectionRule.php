@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BonusSectionRule extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'bonus_section_id',
+        'rule_type',
+        'rule_value',
+    ];
+
+    // Relationship: BonusSectionRule belongs to one BonusSection
+    public function bonusSection()
+    {
+        return $this->belongsTo(BonusSection::class);
+    }
+
+    // Check if rule is met by user
+    public function isMetBy($user)
+    {
+        if ($this->rule_type === 'direct_referrals') {
+            return $user->directReferrals()->count() >= $this->rule_value;
+        }
+        
+        if ($this->rule_type === 'total_referrals') {
+            return $this->getTotalTeamCount($user->id) >= $this->rule_value;
+        }
+        
+        if ($this->rule_type === 'is_premium') {
+            return $user->is_premium == true;
+        }
+        
+        return false;
+    }
+
+    // Get total team count recursively
+    private function getTotalTeamCount($userId)
+    {
+        $user = User::find($userId);
+        $count = $user->directReferrals()->count();
+        
+        foreach ($user->directReferrals as $referral) {
+            $count += $this->getTotalTeamCount($referral->id);
+        }
+        
+        return $count;
+    }
+}
