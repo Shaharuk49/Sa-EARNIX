@@ -182,35 +182,41 @@ function wireMobileSidebar() {
 	if (document.body.dataset.mobileSidebarWired === '1') return;
 	document.body.dataset.mobileSidebarWired = '1';
 
+	const backdrop = document.getElementById('mobile-sidebar-backdrop');
+
+	const updateToggleState = () => {
+		toggles.forEach((toggle) => {
+			toggle.setAttribute('aria-expanded', sidebar.classList.contains('open') ? 'true' : 'false');
+		});
+	};
+
 	const closeSidebar = () => {
 		sidebar.classList.remove('open');
 		document.body.classList.remove('mobile-sidebar-open');
 		document.documentElement.classList.remove('mobile-sidebar-open');
-		const backdrop = document.getElementById('mobile-sidebar-backdrop');
 		if (backdrop) {
 			backdrop.classList.remove('show');
-			backdrop.style.display = 'none';
 		}
+		updateToggleState();
 	};
 
 	const openSidebar = () => {
 		sidebar.classList.add('open');
 		document.body.classList.add('mobile-sidebar-open');
 		document.documentElement.classList.add('mobile-sidebar-open');
-		let backdrop = document.getElementById('mobile-sidebar-backdrop');
-		if (!backdrop) {
-			backdrop = document.createElement('div');
-			backdrop.id = 'mobile-sidebar-backdrop';
-			backdrop.className = 'mobile-sidebar-backdrop';
-			document.body.appendChild(backdrop);
+		if (backdrop) {
+			backdrop.classList.add('show');
 		}
-		backdrop.classList.add('show');
-		backdrop.style.display = 'block';
+		updateToggleState();
 	};
 
 	const toggleSidebar = (event) => {
 		event?.preventDefault();
 		event?.stopPropagation();
+		if (window.innerWidth >= 768) {
+			closeSidebar();
+			return;
+		}
 		if (sidebar.classList.contains('open')) {
 			closeSidebar();
 		} else {
@@ -231,6 +237,14 @@ function wireMobileSidebar() {
 		event.stopPropagation();
 	});
 
+	sidebar.querySelectorAll('a, button').forEach((link) => {
+		link.addEventListener('click', () => {
+			if (window.innerWidth < 768) {
+				closeSidebar();
+			}
+		});
+	});
+
 	document.addEventListener('click', (event) => {
 		if (event.target.id === 'mobile-sidebar-backdrop') {
 			closeSidebar();
@@ -248,6 +262,8 @@ function wireMobileSidebar() {
 			closeSidebar();
 		}
 	});
+
+	updateToggleState();
 }
 
 // Run each initializer in isolation so one failing function

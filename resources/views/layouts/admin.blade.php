@@ -28,10 +28,10 @@
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 1040;
             display: flex;
             flex-direction: column;
-            transition: transform .3s;
+            transition: transform .3s ease, visibility .3s ease;
             overflow-y: auto;
             overscroll-behavior: contain;
         }
@@ -65,9 +65,36 @@
             font-size: .75rem;
         }
         @media (max-width: 768px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.open { transform: translateX(0); }
+            .sidebar {
+                transform: translateX(-100%);
+                visibility: hidden;
+                pointer-events: none;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+                visibility: visible;
+                pointer-events: auto;
+            }
             .topbar, .main-content { margin-left: 0; }
+        }
+
+        .mobile-sidebar-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 1030;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .2s ease, visibility .2s ease;
+        }
+
+        .mobile-sidebar-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        body.mobile-sidebar-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -75,7 +102,9 @@
       data-flash-success="{{ session('success') }}"
       data-flash-error="{{ session('error') }}">
 
-<div class="sidebar" id="sidebar">
+<div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop" aria-hidden="true"></div>
+
+<div class="sidebar" id="sidebar" role="navigation" aria-label="Admin sidebar">
     <div class="admin-sidebar-shell">
         <div class="sidebar-brand admin-sidebar-brand">
             <div class="d-flex align-items-center gap-3">
@@ -217,6 +246,7 @@
                 data-mobile-sidebar-toggle
                 data-mobile-sidebar-target="#sidebar"
                 aria-controls="sidebar"
+                aria-expanded="false"
                 aria-label="Toggle sidebar">
             <i class="fas fa-bars"></i>
         </button>
