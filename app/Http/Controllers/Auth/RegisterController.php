@@ -73,8 +73,11 @@ class RegisterController extends Controller
             return redirect()->route('register')->with('error', 'প্রথমে registration form পূরণ করুন।');
         }
 
+        $paymentPhone = AdminSetting::where('key_name', 'registration_payment_phone')->value('value_text') ?? '';
+
         return view('auth.registration-payment', [
             'amount' => self::REGISTRATION_FEE,
+            'paymentPhone' => $paymentPhone,
         ]);
     }
 
@@ -90,8 +93,11 @@ class RegisterController extends Controller
         $request->validate([
             'payment_method'  => 'required|string|in:bkash,nagad,rocket,card',
             'transaction_ref' => 'required|string|max:100|unique:registration_payments,gateway_transaction_id',
+            'mobile_number'   => ['required','string','regex:/^01[3-9]\d{8}$/','max:15'],
         ], [
             'transaction_ref.unique' => 'এই Transaction ID ইতিমধ্যে ব্যবহার হয়েছে।',
+            'mobile_number.required' => 'Mobile number অবশ্যই প্রদান করতে হবে।',
+            'mobile_number.regex' => 'Bangladeshi mobile number সঠিক format এ দিতে হবে।',
         ]);
 
         $pending = Session::get('pending_registration');
@@ -128,9 +134,11 @@ class RegisterController extends Controller
                 'payment_method'          => $request->payment_method,
                 'gateway_name'            => 'manual',
                 'gateway_transaction_id'  => $request->transaction_ref,
+                'mobile_number'           => $request->mobile_number,
                 'status'                  => 'pending',
                 'raw_response'            => json_encode([
                     'transaction_ref' => $request->transaction_ref,
+                    'mobile_number'   => $request->mobile_number,
                     'message'         => 'Awaiting admin approval',
                 ]),
             ]);

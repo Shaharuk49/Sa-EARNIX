@@ -1,1 +1,1 @@
-{"version":"pest_3.8.5","defects":[],"times":{"P\\Tests\\Unit\\ExampleTest::__pest_evaluable_that_true_is_true":0.014}}
+{"version":"pest_3.8.5","defects":{"P\\Tests\\Feature\\BonusClaimTest::__pest_evaluable_it_credits_the_wallet_when_a_user_claims_the_welcome_bonus":8},"times":{"P\\Tests\\Unit\\ExampleTest::__pest_evaluable_that_true_is_true":0.014}}

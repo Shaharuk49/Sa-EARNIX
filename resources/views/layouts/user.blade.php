@@ -163,7 +163,11 @@
             <div class="d-flex align-items-center gap-2">
                 <span class="small text-muted">{{ auth()->user()->name ?? '' }}</span>
                 <button class="btn btn-sm btn-outline-secondary rounded-pill"
-                        data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                        type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileMenu"
+                        aria-controls="mobileMenu"
+                        aria-label="Open menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -193,10 +197,10 @@
             <a href="{{ route('user.withdraw') }}" class="bottom-nav-item {{ request()->routeIs('user.withdraw*') ? 'active' : '' }}">
                 <i class="fas fa-arrow-up-from-bracket"></i><span>Withdraw</span>
             </a>
-            <a href="#" class="bottom-nav-item {{ request()->routeIs('user.bonus*','user.salary*','user.badge*','user.leaderboard','premium.*','user.personal-info','user.freelancing','user.skills*','user.shop*','user.orders*') ? 'active' : '' }}"
-               data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <button type="button" class="bottom-nav-item btn btn-link p-0 border-0 {{ request()->routeIs('user.bonus*','user.salary*','user.badge*','user.leaderboard','premium.*','user.personal-info','user.freelancing','user.skills*','user.shop*','user.orders*') ? 'active' : '' }}"
+               data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu" aria-label="Open menu">
                 <i class="fas fa-bars"></i><span>Menu</span>
-            </a>
+            </button>
         </div>
     </div>
 
@@ -228,40 +232,40 @@
             <ul class="list-unstyled mb-0">
                 {{-- Main --}}
                 <li class="mobile-nav-section">Main</li>
-                <li><a href="{{ route('user.home') }}" class="mobile-nav-link {{ request()->routeIs('user.home') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.home') }}" class="mobile-nav-link {{ request()->routeIs('user.home') ? 'active' : '' }}">
                     <i class="fas fa-home fa-fw"></i> Home</a></li>
-                <li><a href="{{ route('user.team') }}" class="mobile-nav-link {{ request()->routeIs('user.team*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.team') }}" class="mobile-nav-link {{ request()->routeIs('user.team*') ? 'active' : '' }}">
                     <i class="fas fa-users fa-fw"></i> My Team</a></li>
-                <li><a href="{{ route('user.income') }}" class="mobile-nav-link {{ request()->routeIs('user.income*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.income') }}" class="mobile-nav-link {{ request()->routeIs('user.income*') ? 'active' : '' }}">
                     <i class="fas fa-wallet fa-fw"></i> Income</a></li>
-                <li><a href="{{ route('user.withdraw') }}" class="mobile-nav-link {{ request()->routeIs('user.withdraw*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.withdraw') }}" class="mobile-nav-link {{ request()->routeIs('user.withdraw*') ? 'active' : '' }}">
                     <i class="fas fa-arrow-up-from-bracket fa-fw"></i> Withdraw</a></li>
 
                 {{-- Earnings --}}
                 <li class="mobile-nav-section">Earnings</li>
-                <li><a href="{{ route('user.bonus') }}" class="mobile-nav-link {{ request()->routeIs('user.bonus*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.bonus') }}" class="mobile-nav-link {{ request()->routeIs('user.bonus*') ? 'active' : '' }}">
                     <i class="fas fa-gift fa-fw text-warning"></i> Welcome Bonus</a></li>
-                <li><a href="{{ route('user.salary') }}" class="mobile-nav-link {{ request()->routeIs('user.salary*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.salary') }}" class="mobile-nav-link {{ request()->routeIs('user.salary*') ? 'active' : '' }}">
                     <i class="fas fa-money-bill-wave fa-fw text-success"></i> Monthly Salary</a></li>
-                <li><a href="{{ route('premium.upgrade.show') }}" class="mobile-nav-link {{ request()->routeIs('premium.*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('premium.upgrade.show') }}" class="mobile-nav-link {{ request()->routeIs('premium.*') ? 'active' : '' }}">
                     <i class="fas fa-star fa-fw text-warning"></i> Premium Upgrade</a></li>
 
                 {{-- Ranks --}}
                 <li class="mobile-nav-section">Ranks</li>
-                <li><a href="{{ route('user.badge.index') }}" class="mobile-nav-link {{ request()->routeIs('user.badge*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.badge.index') }}" class="mobile-nav-link {{ request()->routeIs('user.badge*') ? 'active' : '' }}">
                     <i class="fas fa-medal fa-fw text-primary"></i> Leader Ranks</a></li>
-                <li><a href="{{ route('user.leaderboard') }}" class="mobile-nav-link {{ request()->routeIs('user.leaderboard') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.leaderboard') }}" class="mobile-nav-link {{ request()->routeIs('user.leaderboard') ? 'active' : '' }}">
                     <i class="fas fa-trophy fa-fw text-warning"></i> Leaderboard</a></li>
 
                 {{-- Earn More --}}
                 <li class="mobile-nav-section">Earn More</li>
-                <li><a href="{{ route('user.freelancing') }}" class="mobile-nav-link {{ request()->routeIs('user.freelancing') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.freelancing') }}" class="mobile-nav-link {{ request()->routeIs('user.freelancing') ? 'active' : '' }}">
                     <i class="fas fa-laptop-code fa-fw text-primary"></i> Freelancing</a></li>
-                <li><a href="{{ route('user.skills.index') }}" class="mobile-nav-link {{ request()->routeIs('user.skills*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.skills.index') }}" class="mobile-nav-link {{ request()->routeIs('user.skills*') ? 'active' : '' }}">
                     <i class="fas fa-graduation-cap fa-fw text-success"></i> Skills Learning</a></li>
-                <li><a href="{{ route('user.shop.index') }}" class="mobile-nav-link {{ request()->routeIs('user.shop*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.shop.index') }}" class="mobile-nav-link {{ request()->routeIs('user.shop*') ? 'active' : '' }}">
                     <i class="fas fa-store fa-fw text-warning"></i> Shop</a></li>
-                <li><a href="{{ route('user.orders.index') }}" class="mobile-nav-link {{ request()->routeIs('user.orders*') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.orders.index') }}" class="mobile-nav-link {{ request()->routeIs('user.orders*') ? 'active' : '' }}">
                     <i class="fas fa-box fa-fw text-info"></i> My Orders</a></li>
                 @if($dropshippingLink)
                 <li><a href="{{ $dropshippingLink }}" target="_blank" rel="noopener noreferrer" class="mobile-nav-link">
@@ -274,7 +278,7 @@
 
                 {{-- Account --}}
                 <li class="mobile-nav-section">Account</li>
-                <li><a href="{{ route('user.personal-info') }}" class="mobile-nav-link {{ request()->routeIs('user.personal-info') ? 'active' : '' }}" data-bs-dismiss="offcanvas">
+                <li><a href="{{ route('user.personal-info') }}" class="mobile-nav-link {{ request()->routeIs('user.personal-info') ? 'active' : '' }}">
                     <i class="fas fa-user fa-fw text-info"></i> My Profile</a></li>
                 @if($supportLink)
                 <li><a href="{{ $supportLink }}" target="_blank" rel="noopener noreferrer" class="mobile-nav-link">

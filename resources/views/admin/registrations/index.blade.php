@@ -43,6 +43,7 @@
                         <th>Referrer</th>
                         <th>Method</th>
                         <th>Trx ID</th>
+                        <th>Mobile</th>
                         <th>Amount</th>
                         <th>Status</th>
                         <th>Submitted</th>
@@ -67,6 +68,7 @@
                             </td>
                             <td><span class="badge bg-secondary text-uppercase">{{ $p->payment_method }}</span></td>
                             <td><code>{{ $p->gateway_transaction_id }}</code></td>
+                            <td><code>{{ $p->mobile_number ?? '—' }}</code></td>
                             <td class="fw-bold">৳{{ number_format($p->amount, 0) }}</td>
                             <td>
                                 @if($p->status === 'pending')

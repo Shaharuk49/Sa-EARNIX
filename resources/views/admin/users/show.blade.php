@@ -88,6 +88,7 @@
                     <div class="mb-2"><strong>Registration Amount:</strong> ৳{{ number_format($registrationPayment->amount, 2) }}</div>
                     <div class="mb-2"><strong>Method:</strong> {{ ucfirst($registrationPayment->payment_method ?? 'manual') }}</div>
                     <div class="mb-2"><strong>Transaction ID:</strong> {{ $registrationPayment->gateway_transaction_id ?? '—' }}</div>
+                    <div class="mb-2"><strong>Mobile Number:</strong> {{ $registrationPayment->mobile_number ?? '—' }}</div>
                     <div class="mb-2"><strong>Status:</strong>
                         @if($registrationPayment->status === 'paid')
                             <span class="badge bg-success">Paid</span>

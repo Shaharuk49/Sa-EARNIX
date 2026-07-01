@@ -1,11 +1,12 @@
 import './bootstrap';
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
 
 window.$ = $;
 window.jQuery = $;
 window.Swal = Swal;
+window.bootstrap = bootstrap;
 
 const toast = Swal.mixin({
 	toast: true,
@@ -157,11 +158,115 @@ function wirePasswordToggles() {
 	});
 }
 
+function wireMobileMenu() {
+	const offcanvas = document.getElementById('mobileMenu');
+	if (!offcanvas || typeof window.bootstrap?.Offcanvas !== 'function') return;
+	const instance = window.bootstrap.Offcanvas.getOrCreateInstance(offcanvas);
+
+	document.querySelectorAll('#mobileMenu .mobile-nav-link').forEach((link) => {
+		link.addEventListener('click', () => {
+			if (link.getAttribute('target') === '_blank') {
+				instance.hide();
+				return;
+			}
+			instance.hide();
+		});
+	});
+}
+
+function wireMobileSidebar() {
+	const toggles = document.querySelectorAll('[data-mobile-sidebar-toggle]');
+	const sidebar = document.querySelector('#sidebar');
+	if (!toggles.length || !sidebar) return;
+
+	if (document.body.dataset.mobileSidebarWired === '1') return;
+	document.body.dataset.mobileSidebarWired = '1';
+
+	const closeSidebar = () => {
+		sidebar.classList.remove('open');
+		document.body.classList.remove('mobile-sidebar-open');
+		document.documentElement.classList.remove('mobile-sidebar-open');
+		const backdrop = document.getElementById('mobile-sidebar-backdrop');
+		if (backdrop) {
+			backdrop.classList.remove('show');
+			backdrop.style.display = 'none';
+		}
+	};
+
+	const openSidebar = () => {
+		sidebar.classList.add('open');
+		document.body.classList.add('mobile-sidebar-open');
+		document.documentElement.classList.add('mobile-sidebar-open');
+		let backdrop = document.getElementById('mobile-sidebar-backdrop');
+		if (!backdrop) {
+			backdrop = document.createElement('div');
+			backdrop.id = 'mobile-sidebar-backdrop';
+			backdrop.className = 'mobile-sidebar-backdrop';
+			document.body.appendChild(backdrop);
+		}
+		backdrop.classList.add('show');
+		backdrop.style.display = 'block';
+	};
+
+	const toggleSidebar = (event) => {
+		event?.preventDefault();
+		event?.stopPropagation();
+		if (sidebar.classList.contains('open')) {
+			closeSidebar();
+		} else {
+			openSidebar();
+		}
+	};
+
+	toggles.forEach((toggle) => {
+		toggle.addEventListener('click', (event) => {
+			const targetSelector = toggle.getAttribute('data-mobile-sidebar-target') || '#sidebar';
+			const targetSidebar = document.querySelector(targetSelector);
+			if (!targetSidebar) return;
+			toggleSidebar(event);
+		});
+	});
+
+	sidebar.addEventListener('click', (event) => {
+		event.stopPropagation();
+	});
+
+	document.addEventListener('click', (event) => {
+		if (event.target.id === 'mobile-sidebar-backdrop') {
+			closeSidebar();
+		}
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && sidebar.classList.contains('open')) {
+			closeSidebar();
+		}
+	});
+
+	window.addEventListener('resize', () => {
+		if (window.innerWidth >= 768) {
+			closeSidebar();
+		}
+	});
+}
+
+// Run each initializer in isolation so one failing function
+// can never block the rest (e.g. sidebars) from wiring up.
+function safe(fn, label) {
+	try {
+		fn();
+	} catch (error) {
+		console.error(`[app.js] "${label}" failed:`, error);
+	}
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-	showFlashMessages();
-	wireCopyButtons();
-	wireConfirmForms();
-	wireAjaxForms();
-	revealOnScroll();
-	wirePasswordToggles();
+	safe(showFlashMessages, 'showFlashMessages');
+	safe(wireCopyButtons, 'wireCopyButtons');
+	safe(wireConfirmForms, 'wireConfirmForms');
+	safe(wireAjaxForms, 'wireAjaxForms');
+	safe(revealOnScroll, 'revealOnScroll');
+	safe(wirePasswordToggles, 'wirePasswordToggles');
+	safe(wireMobileMenu, 'wireMobileMenu');
+	safe(wireMobileSidebar, 'wireMobileSidebar');
 });

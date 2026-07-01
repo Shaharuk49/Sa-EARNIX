@@ -1082,6 +1082,32 @@ textarea.form-control {
     color: #dc3545 !important;
 }
 
+/* Mobile sidebar overlay */
+.mobile-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.mobile-sidebar-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.mobile-sidebar-open {
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .sidebar.open {
+        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.35);
+    }
+}
+
 /* Bottom nav update */
 .bottom-nav {
     position: fixed;

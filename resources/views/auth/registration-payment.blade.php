@@ -45,6 +45,22 @@
             <div class="fs-4">{{ number_format($amount, 0) }} Tk</div>
         </div>
 
+        <div class="card border-primary border-opacity-25 rounded-4 mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="fas fa-mobile-alt text-primary"></i>
+                    <span class="fw-semibold">Send payment to this number</span>
+                </div>
+                <div class="fs-5 fw-bold text-primary">{{ $paymentPhone ?: 'Contact admin for payment number' }}</div>
+                <div class="small text-muted mt-2">Admin can update this number from settings.</div>
+                <ol class="mt-3 mb-0 ps-3">
+                    <li>Send the registration fee to the number above.</li>
+                    <li>Enter your phone number and transaction ID below.</li>
+                    <li>Submit the form and wait for admin approval.</li>
+                </ol>
+            </div>
+        </div>
+
         <form method="POST" action="{{ route('payment.process') }}" class="auth-form">
             @csrf
 
@@ -68,6 +84,15 @@
                     <i class="fas fa-receipt auth-input-icon"></i>
                     <input id="transaction-ref" type="text" name="transaction_ref" class="form-control auth-control" placeholder="Example: TXN123456" required>
                 </div>
+            </div>
+
+            <div class="auth-field">
+                <label class="auth-label" for="mobile-number">Mobile Number</label>
+                <div class="auth-input-wrap">
+                    <i class="fas fa-mobile-screen auth-input-icon"></i>
+                    <input id="mobile-number" type="tel" name="mobile_number" class="form-control auth-control" placeholder="Example: 01712345678" maxlength="11" required>
+                </div>
+                <small class="text-muted">Bangladeshi number only (e.g. 01712345678)</small>
             </div>
 
             <button type="submit" class="btn btn-auth py-3">Pay {{ number_format($amount, 0) }} Tk and Complete Registration</button>

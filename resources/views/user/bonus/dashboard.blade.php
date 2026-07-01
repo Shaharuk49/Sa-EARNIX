@@ -88,16 +88,16 @@
 
                         <!-- Videos List -->
                         <div class="list-group list-group-sm">
-                            @forelse ($item['section']->videos()->orderBy('video_order')->get() as $video)
+                            @forelse ($item['section']->videos()->orderBy('sort_order')->get() as $video)
                                 <a href="{{ $item['is_unlocked'] ? route('user.bonus.section', $item['section']) : '#' }}" 
                                    class="list-group-item list-group-item-action {{ !$item['is_unlocked'] ? 'disabled' : '' }}">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
                                             <small class="d-block">
-                                                <i class="fas {{ in_array($video->id, $item['watched_videos']) ? 'fa-check-circle text-success' : 'fa-circle text-muted' }}"></i>
-                                                {{ $video->video_title }}
+                                                <i class="fas {{ in_array($video->id, $item['watched_video_ids'] ?? []) ? 'fa-check-circle text-success' : 'fa-circle text-muted' }}"></i>
+                                                {{ $video->title }}
                                             </small>
-                                            <small class="text-muted">{{ $video->duration_minutes }} min</small>
+                                            <small class="text-muted">{{ $video->duration_minutes ?? '' }}</small>
                                         </div>
                                         <i class="fas fa-chevron-right text-muted"></i>
                                     </div>

@@ -30,6 +30,12 @@
                                value="{{ $settings['dropshipping_link'] ?? '' }}" placeholder="https://...">
                         <div class="form-text">Dropshipping & Print On Demand button redirect</div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Registration Payment Phone Number</label>
+                        <input type="text" name="registration_payment_phone" class="form-control"
+                               value="{{ $settings['registration_payment_phone'] ?? '' }}" placeholder="01712345678">
+                        <div class="form-text">This number will be shown on the registration payment page for users to send money to.</div>
+                    </div>
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Monthly Salary Global Rules</label>
                         <textarea name="monthly_salary_rules" class="form-control" rows="5"

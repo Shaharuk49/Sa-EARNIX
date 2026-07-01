@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Models\BonusSection;
 use App\Models\BonusVideoProgress;
+use App\Models\WalletAccount;
+use App\Models\WalletTransaction;
 use App\Models\WelcomeBonusClaim;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,13 +24,18 @@ class BonusController extends Controller
         
         // Calculate section status for user
         $sectionStatus = $sections->map(function ($section) use ($user) {
+            $videoIds = $section->videos()->pluck('id')->toArray();
+            $watchedVideoIds = BonusVideoProgress::where('user_id', $user->id)
+                ->whereIn('bonus_section_video_id', $videoIds)
+                ->pluck('bonus_section_video_id')
+                ->toArray();
+
             return [
                 'section' => $section,
                 'is_unlocked' => $section->isUnlockedFor($user->id),
-                'total_videos' => $section->videos()->count(),
-                'watched_videos' => BonusVideoProgress::where('user_id', $user->id)
-                    ->whereIn('bonus_section_video_id', $section->videos()->pluck('id'))
-                    ->count(),
+                'total_videos' => count($videoIds),
+                'watched_videos' => count($watchedVideoIds),
+                'watched_video_ids' => $watchedVideoIds,
             ];
         });
         
@@ -112,33 +119,36 @@ class BonusController extends Controller
         // Process claim
         DB::transaction(function () use ($user) {
             $amount = WelcomeBonusClaim::BONUS_AMOUNT;
-            
-            // Create claim record
-            WelcomeBonusClaim::create([
+
+            $claim = WelcomeBonusClaim::create([
                 'user_id' => $user->id,
                 'amount' => $amount,
                 'claimed_at' => now(),
-                'status' => 'completed',
+                'status' => 'claimed',
             ]);
-            
-            // Add to wallet
-            $walletAccount = $user->walletAccount();
-            if ($walletAccount) {
-                $walletAccount->increment('current_balance', $amount);
-                
-                // Log transaction
-                $walletAccount->transactions()->create([
-                    'user_id' => $user->id,
-                    'amount' => $amount,
-                    'type' => 'credit',
-                    'source_type' => 'welcome_bonus',
-                    'description' => 'Welcome Bonus Claim - 1000 BDT',
-                    'balance_before' => $walletAccount->current_balance - $amount,
-                    'balance_after' => $walletAccount->current_balance,
-                    'status' => 'completed',
-                    'transaction_date' => now(),
-                ]);
-            }
+
+            $walletAccount = WalletAccount::firstOrCreate(
+                ['user_id' => $user->id],
+                ['current_balance' => 0, 'hold_balance' => 0, 'total_earned' => 0, 'total_withdrawn' => 0]
+            );
+
+            $balanceBefore = (float) $walletAccount->current_balance;
+            $walletAccount->current_balance = $balanceBefore + $amount;
+            $walletAccount->total_earned = (float) $walletAccount->total_earned + $amount;
+            $walletAccount->save();
+
+            WalletTransaction::create([
+                'user_id' => $user->id,
+                'type' => 'credit',
+                'source_type' => 'welcome_bonus',
+                'reference_type' => WelcomeBonusClaim::class,
+                'reference_id' => $claim->id,
+                'amount' => $amount,
+                'balance_before' => $balanceBefore,
+                'balance_after' => $balanceBefore + $amount,
+                'status' => 'completed',
+                'note' => 'Welcome Bonus Claim - 1000 BDT',
+            ]);
         });
         
         return redirect()->route('user.bonus')->with('success', 'Bonus claimed successfully! 1000 BDT added to your wallet.');

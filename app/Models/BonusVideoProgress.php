@@ -9,6 +9,8 @@ class BonusVideoProgress extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_bonus_video_progress';
+
     protected $fillable = [
         'user_id',
         'bonus_section_video_id',
@@ -17,6 +19,7 @@ class BonusVideoProgress extends Model
 
     protected $casts = [
         'watched_at' => 'datetime',
+        'is_watched' => 'boolean',
     ];
 
     // Relationship: BonusVideoProgress belongs to one User

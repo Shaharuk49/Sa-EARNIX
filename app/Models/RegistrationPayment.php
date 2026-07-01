@@ -13,6 +13,7 @@ class RegistrationPayment extends Model
         'payment_method',
         'gateway_name',
         'gateway_transaction_id',
+        'mobile_number',
         'status',
         'paid_at',
         'raw_response',

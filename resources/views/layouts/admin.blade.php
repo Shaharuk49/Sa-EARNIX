@@ -212,7 +212,12 @@
 
 <div class="topbar">
     <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-sm btn-outline-secondary d-md-none" onclick="document.getElementById('sidebar').classList.toggle('open')">
+        <button class="btn btn-sm btn-outline-secondary d-md-none"
+                type="button"
+                data-mobile-sidebar-toggle
+                data-mobile-sidebar-target="#sidebar"
+                aria-controls="sidebar"
+                aria-label="Toggle sidebar">
             <i class="fas fa-bars"></i>
         </button>
         <h6 class="mb-0 fw-semibold text-dark">@yield('page-title', 'Dashboard')</h6>
