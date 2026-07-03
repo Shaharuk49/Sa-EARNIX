@@ -225,11 +225,26 @@ function wireMobileSidebar() {
 	};
 
 	toggles.forEach((toggle) => {
-		toggle.addEventListener('click', (event) => {
+		const handleToggle = (event) => {
+			event?.preventDefault();
+			event?.stopPropagation();
 			const targetSelector = toggle.getAttribute('data-mobile-sidebar-target') || '#sidebar';
 			const targetSidebar = document.querySelector(targetSelector);
 			if (!targetSidebar) return;
 			toggleSidebar(event);
+		};
+
+		toggle.addEventListener('pointerup', (event) => {
+			if (event.pointerType === 'mouse' && event.button !== 0) {
+				return;
+			}
+			handleToggle(event);
+		});
+
+		toggle.addEventListener('keydown', (event) => {
+			if (event.key === 'Enter' || event.key === ' ') {
+				handleToggle(event);
+			}
 		});
 	});
 

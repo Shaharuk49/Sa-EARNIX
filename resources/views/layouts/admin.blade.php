@@ -47,6 +47,11 @@
             top: 0;
             z-index: 900;
         }
+        .mobile-sidebar-toggle {
+            touch-action: manipulation;
+            cursor: pointer !important;
+            -webkit-tap-highlight-color: transparent;
+        }
         .main-content {
             margin-left: var(--sidebar-w);
             padding: 24px;
@@ -241,7 +246,7 @@
 
 <div class="topbar">
     <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-sm btn-outline-secondary d-md-none"
+        <button class="btn btn-sm btn-outline-secondary d-md-none mobile-sidebar-toggle"
                 type="button"
                 data-mobile-sidebar-toggle
                 data-mobile-sidebar-target="#sidebar"
