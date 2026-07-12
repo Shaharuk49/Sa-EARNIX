@@ -28,7 +28,7 @@
     @endif
 
     {{-- Salary Levels --}}
-    @foreach($levelData as $item)
+    @forelse($levelData as $item)
         @php $level = $item['level']; @endphp
         <div class="card border-0 shadow-sm mb-3">
             <div class="card-body">
@@ -74,7 +74,17 @@
                 @endif
             </div>
         </div>
-    @endforeach
+    @empty
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-body text-center py-5">
+                <div class="mb-3">
+                    <i class="fas fa-dollar-sign fa-2x text-secondary"></i>
+                </div>
+                <h5 class="fw-bold">Monthly salary levels are not available</h5>
+                <p class="text-muted mb-0">Please configure monthly salary levels in your admin panel or seed the database to show salary structure.</p>
+            </div>
+        </div>
+    @endforelse
 
     {{-- Global Rules --}}
     @if($globalRules)

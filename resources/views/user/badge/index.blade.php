@@ -36,7 +36,7 @@
 
     {{-- Badge Grid --}}
     <div class="row g-3">
-        @foreach($badgeData as $item)
+        @forelse($badgeData as $item)
             <div class="col-4">
                 <a href="{{ route('user.badge.show', $item['badge']->slug) }}" class="text-decoration-none">
                     <div class="card border-0 shadow-sm text-center py-3 {{ $item['earned'] ? 'border-warning border' : '' }}">

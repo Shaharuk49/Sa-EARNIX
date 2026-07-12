@@ -11,7 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class PremiumUpgradeController extends Controller
 {
-    private const UPGRADE_FEE = 250;
+    private const DEFAULT_UPGRADE_FEE = 250;
+
+    private function getUpgradeAmount(): float
+    {
+        $amount = AdminSetting::where('key_name', 'premium_upgrade_amount')->value('value_text');
+
+        return (float) ($amount ?: self::DEFAULT_UPGRADE_FEE);
+    }
+
+    private function getPaymentPhone(): string
+    {
+        return AdminSetting::where('key_name', 'premium_upgrade_payment_phone')->value('value_text') ?? '';
+    }
 
     /**
      * Show premium upgrade form.
@@ -21,11 +33,12 @@ class PremiumUpgradeController extends Controller
         $user = Auth::user();
 
         if ($user->is_premium) {
-            return redirect()->route('user.home')->with('info', 'আপনি ইতিমধ্যে premium member.');
+            return redirect()->route('user.home')->with('info', 'আপনি ইতিমধ্যেই premium member.');
         }
 
         return view('user.premium.upgrade', [
-            'amount' => self::UPGRADE_FEE,
+            'amount' => $this->getUpgradeAmount(),
+            'paymentPhone' => $this->getPaymentPhone(),
         ]);
     }
 
@@ -45,10 +58,12 @@ class PremiumUpgradeController extends Controller
             'transaction_ref' => 'required|string|max:100',
         ]);
 
-        DB::transaction(function () use ($user, $request) {
+        $amount = $this->getUpgradeAmount();
+
+        DB::transaction(function () use ($user, $request, $amount) {
             $premium = PremiumUpgrade::create([
                 'user_id' => $user->id,
-                'amount' => self::UPGRADE_FEE,
+                'amount' => $amount,
                 'currency' => 'BDT',
                 'payment_method' => $request->payment_method,
                 'gateway_name' => 'manual',
@@ -64,7 +79,7 @@ class PremiumUpgradeController extends Controller
 
             AdminSetting::updateOrCreate(
                 ['key_name' => 'company_wallet_balance'],
-                ['value_text' => (string) ($balance + self::UPGRADE_FEE)]
+                ['value_text' => (string) ($balance + $amount)]
             );
         });
 

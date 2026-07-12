@@ -3,7 +3,7 @@
 @section('page-title', 'Monthly Salary Management')
 
 @section('content')
-@foreach($levels as $level)
+@forelse($levels as $level)
 <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-white d-flex justify-content-between align-items-center">
         <div>
@@ -69,5 +69,15 @@
         </form>
     </div>
 </div>
-@endforeach
+@empty
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body text-center py-5">
+        <div class="mb-3">
+            <i class="fas fa-info-circle fa-2x text-secondary"></i>
+        </div>
+        <h5 class="fw-bold">No salary levels found</h5>
+        <p class="text-muted mb-0">Please add monthly salary levels in your local or production database so this page can display structured data.</p>
+    </div>
+</div>
+@endforelse
 @endsection

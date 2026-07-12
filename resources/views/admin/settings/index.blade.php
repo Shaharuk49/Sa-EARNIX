@@ -36,6 +36,18 @@
                                value="{{ $settings['registration_payment_phone'] ?? '' }}" placeholder="01712345678">
                         <div class="form-text">This number will be shown on the registration payment page for users to send money to.</div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Premium Upgrade Payment Phone Number</label>
+                        <input type="text" name="premium_upgrade_payment_phone" class="form-control"
+                               value="{{ $settings['premium_upgrade_payment_phone'] ?? '' }}" placeholder="01712345678">
+                        <div class="form-text">This number will be shown on the premium upgrade payment page for users to send money to.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Premium Upgrade Amount</label>
+                        <input type="number" name="premium_upgrade_amount" class="form-control"
+                               value="{{ $settings['premium_upgrade_amount'] ?? '' }}" placeholder="250" min="0">
+                        <div class="form-text">This amount will be shown and charged for premium upgrades.</div>
+                    </div>
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Monthly Salary Global Rules</label>
                         <textarea name="monthly_salary_rules" class="form-control" rows="5"

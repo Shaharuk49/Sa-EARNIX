@@ -19,14 +19,24 @@ class AdminSettingsController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'support_link'         => 'nullable|string|max:500',
-            'laptop_apply_link'    => 'nullable|string|max:500',
-            'dropshipping_link'    => 'nullable|string|max:500',
-            'monthly_salary_rules' => 'nullable|string',
-            'registration_payment_phone' => 'nullable|string|max:20',
+            'support_link'                => 'nullable|string|max:500',
+            'laptop_apply_link'           => 'nullable|string|max:500',
+            'dropshipping_link'           => 'nullable|string|max:500',
+            'monthly_salary_rules'        => 'nullable|string',
+            'registration_payment_phone'  => 'nullable|string|max:20',
+            'premium_upgrade_payment_phone' => 'nullable|string|max:20',
+            'premium_upgrade_amount'      => 'nullable|numeric|min:0',
         ]);
 
-        $keys = ['support_link', 'laptop_apply_link', 'dropshipping_link', 'monthly_salary_rules', 'registration_payment_phone'];
+        $keys = [
+            'support_link',
+            'laptop_apply_link',
+            'dropshipping_link',
+            'monthly_salary_rules',
+            'registration_payment_phone',
+            'premium_upgrade_payment_phone',
+            'premium_upgrade_amount',
+        ];
         foreach ($keys as $key) {
             AdminSetting::updateOrCreate(
                 ['key_name' => $key],

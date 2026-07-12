@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row g-3">
-    @foreach($badges as $badge)
+    @forelse($badges as $badge)
     <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-white d-flex justify-content-between align-items-center">
@@ -64,6 +64,16 @@
             </form>
         </div></div>
     </div>
-    @endforeach
+    @empty
+    <div class="col-12">
+        <div class="card border-0 shadow-sm py-5 text-center">
+            <div class="mb-3">
+                <i class="fas fa-award fa-2x text-secondary"></i>
+            </div>
+            <h5 class="fw-bold">No badges available</h5>
+            <p class="text-muted mb-0">Add leader badges to the database or run your seeders so this page can show the badge structure.</p>
+        </div>
+    </div>
+    @endforelse
 </div>
 @endsection
