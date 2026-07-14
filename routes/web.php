@@ -44,9 +44,28 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('premium')->group(function () {
-        Route::get('upgrade', [App\Http\Controllers\User\PremiumUpgradeController::class, 'show'])->name('premium.upgrade.show');
-        Route::post('upgrade', [App\Http\Controllers\User\PremiumUpgradeController::class, 'process'])->name('premium.upgrade.process');
-    });
+
+    Route::get('upgrade', [App\Http\Controllers\User\PremiumUpgradeController::class, 'show'])
+        ->name('premium.upgrade.show');
+
+    Route::post('upgrade', [App\Http\Controllers\User\PremiumUpgradeController::class, 'process'])
+        ->name('premium.upgrade.process');
+
+    Route::get('upgrade/success/{premium}', [App\Http\Controllers\User\PremiumUpgradeController::class, 'success'])
+        ->name('premium.upgrade.success');
+
+    Route::get('benefits', [App\Http\Controllers\User\PremiumUpgradeController::class, 'benefits'])
+        ->name('premium.benefits');
+
+    Route::get('payment', [App\Http\Controllers\User\PremiumUpgradeController::class, 'showPaymentPage'])
+        ->name('premium.payment.show');
+
+    Route::post('payment', [App\Http\Controllers\User\PremiumUpgradeController::class, 'processPayment'])
+        ->name('premium.payment.process');
+
+    Route::get('payment/success', [App\Http\Controllers\User\PremiumUpgradeController::class, 'paymentSuccess'])
+        ->name('premium.payment.success');
+});
 
     Route::prefix('bonus')->group(function () {
         Route::get('/', [App\Http\Controllers\User\BonusController::class, 'index'])->name('user.bonus');

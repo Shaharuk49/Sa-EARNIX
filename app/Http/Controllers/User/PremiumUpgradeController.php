@@ -26,7 +26,24 @@ class PremiumUpgradeController extends Controller
     }
 
     /**
-     * Show premium upgrade form.
+     * Show the "what you get" premium benefits page.
+     * This is the first stop from the home page upsell banner.
+     */
+    public function benefits()
+    {
+        $user = Auth::user();
+
+        if ($user->is_premium) {
+            return redirect()->route('user.home')->with('info', 'আপনি ইতিমধ্যেই premium member.');
+        }
+
+        return view('user.premium.benefits', [
+            'amount' => $this->getUpgradeAmount(),
+        ]);
+    }
+
+    /**
+     * Show premium upgrade payment form.
      */
     public function show()
     {
@@ -60,7 +77,7 @@ class PremiumUpgradeController extends Controller
 
         $amount = $this->getUpgradeAmount();
 
-        DB::transaction(function () use ($user, $request, $amount) {
+        $premium = DB::transaction(function () use ($user, $request, $amount) {
             $premium = PremiumUpgrade::create([
                 'user_id' => $user->id,
                 'amount' => $amount,
@@ -81,9 +98,23 @@ class PremiumUpgradeController extends Controller
                 ['key_name' => 'company_wallet_balance'],
                 ['value_text' => (string) ($balance + $amount)]
             );
+
+            return $premium;
         });
 
-        return redirect()->route('user.home')
-            ->with('success', 'Premium upgrade successful! আপনার account premium হয়েছে।');
+        return redirect()->route('premium.upgrade.success', ['premium' => $premium->id]);
+    }
+
+    /**
+     * Show the success page after a completed upgrade.
+     */
+    public function success(PremiumUpgrade $premium)
+    {
+        // Make sure a user can only view their own receipt.
+        abort_unless($premium->user_id === Auth::id(), 403);
+
+        return view('user.premium.success', [
+            'premium' => $premium,
+        ]);
     }
 }

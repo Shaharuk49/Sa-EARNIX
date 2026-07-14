@@ -293,10 +293,10 @@
     {{-- Premium Upgrade --}}
     @if(!$user->is_premium)
         <div class="sax-upsell text-center mb-4" data-reveal>
-            <h5 class="mb-2" style="color:#f5c451; position:relative; z-index:1;">Premium Upgrade Now</h5>
-            <p class="small mb-3" style="color:#9a97ad; position:relative; z-index:1;">Unlock all features and earn more!</p>
-            <a href="{{ route('premium.upgrade.show') }}" class="btn sax-btn-gold position-relative" style="z-index:1;">
-                Upgrade 
+            <h5 class="mb-2" style="color:#f5c451; position:relative; z-index:1;">Premium Benefits</h5>
+            <p class="small mb-3" style="color:#9a97ad; position:relative; z-index:1;">Explore exclusive features and earning opportunities</p>
+            <a href="{{ route('premium.benefits') }}" class="btn sax-btn-gold position-relative" style="z-index:1;">
+                View Premium Benefits
             </a>
         </div>
     @endif
