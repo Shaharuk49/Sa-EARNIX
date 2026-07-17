@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminWithdrawController;
 use App\Http\Controllers\Admin\AdminOfficialLinksController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminRegistrationController;
+use App\Http\Controllers\Admin\AdminPremiumController;
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -44,7 +45,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('premium')->group(function () {
-
+    Route::get('upgrade/status/{premium}', [App\Http\Controllers\User\PremiumUpgradeController::class, 'status'])
+    ->name('premium.upgrade.status');
     Route::get('upgrade', [App\Http\Controllers\User\PremiumUpgradeController::class, 'show'])
         ->name('premium.upgrade.show');
 
@@ -191,6 +193,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Alias for navbar
         Route::get('withdraw-methods', fn() => redirect()->route('admin.settings.index'))->name('withdraw-methods.index');
         Route::get('payments', fn() => redirect()->route('admin.registrations.index'))->name('payments.index');
+
+           // Premium Upgrade Payments
+        Route::get('premium', [AdminPremiumController::class, 'index'])->name('premium.index');
+        Route::post('premium/{premium}/approve', [AdminPremiumController::class, 'approve'])->name('premium.approve');
+        Route::post('premium/{premium}/reject', [AdminPremiumController::class, 'reject'])->name('premium.reject');
+        
+      
+    
     });
 });
 

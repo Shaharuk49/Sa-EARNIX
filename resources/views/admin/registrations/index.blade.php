@@ -5,6 +5,13 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="fw-bold mb-0">Registration Payments</h4>
+    <a href="{{ route('admin.premium.index') }}" class="btn btn-sm btn-primary">
+    <i class="bi bi-star-fill me-1"></i>
+    Premium Payment Requests
+    @php
+    $premiumPendingCount = \App\Models\PremiumUpgrade::where('status', 'pending')->count();
+    @endphp
+</a>
     @if($pendingCount > 0)
         <span class="badge bg-danger fs-6">{{ $pendingCount }} Pending</span>
     @endif
