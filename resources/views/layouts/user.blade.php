@@ -7,6 +7,8 @@
     <title>@yield('title', 'SA EarniX')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @stack('styles')
+    @yield('styles')
 </head>
 <body class="page-shell user-shell"
       data-flash-success="{{ session('success') }}"
@@ -290,5 +292,6 @@
         </div>
     </div>
 
+    @stack('scripts')
 </body>
 </html>

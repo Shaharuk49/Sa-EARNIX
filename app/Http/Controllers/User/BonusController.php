@@ -20,8 +20,10 @@ class BonusController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $sections = BonusSection::where('is_active', true)->orderBy('sort_order')->get();
-        
+        $sections = BonusSection::where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
         // Calculate section status for user
         $sectionStatus = $sections->map(function ($section) use ($user) {
             $videoIds = $section->videos()->pluck('id')->toArray();
@@ -33,20 +35,23 @@ class BonusController extends Controller
             return [
                 'section' => $section,
                 'is_unlocked' => $section->isUnlockedFor($user->id),
+                'is_blocked_by_previous' => !$section->hasPreviousSectionsCompletedBy($user->id),
                 'total_videos' => count($videoIds),
                 'watched_videos' => count($watchedVideoIds),
                 'watched_video_ids' => $watchedVideoIds,
+                'is_completed' => count($videoIds) > 0 && count($watchedVideoIds) === count($videoIds),
             ];
         });
-        
+
         // Check if all sections completed
-        $all_completed = $sectionStatus->every(fn($s) => $s['watched_videos'] == $s['total_videos']);
+        $all_completed = $sectionStatus->every(fn ($s) => $s['is_completed']);
         $bonus_claimed = WelcomeBonusClaim::where('user_id', $user->id)->exists();
-        
+
         return view('user.bonus.dashboard', [
             'sections' => $sectionStatus,
             'all_completed' => $all_completed,
             'bonus_claimed' => $bonus_claimed,
+            'bonus_amount' => WelcomeBonusClaim::BONUS_AMOUNT,
         ]);
     }
 
@@ -62,15 +67,20 @@ class BonusController extends Controller
         }
         
         $videos = $bonusSection->videos()->orderBy('sort_order')->get();
-        $watchedVideoIds = BonusVideoProgress::where('user_id', $user->id)
+        $watchedProgress = BonusVideoProgress::where('user_id', $user->id)
             ->whereIn('bonus_section_video_id', $videos->pluck('id'))
-            ->pluck('bonus_section_video_id')
-            ->toArray();
+            ->get(['bonus_section_video_id', 'watched_at']);
+
+        $watchedVideoIds = $watchedProgress->pluck('bonus_section_video_id')->toArray();
+        $watchedVideoDates = $watchedProgress->mapWithKeys(function ($item) {
+            return [$item->bonus_section_video_id => $item->watched_at];
+        })->toArray();
         
         return view('user.bonus.section', [
             'section' => $bonusSection,
             'videos' => $videos,
             'watchedVideoIds' => $watchedVideoIds,
+            'watchedVideoDates' => $watchedVideoDates,
         ]);
     }
 
@@ -118,7 +128,8 @@ class BonusController extends Controller
         
         // Process claim
         DB::transaction(function () use ($user) {
-            $amount = WelcomeBonusClaim::BONUS_AMOUNT;
+            $bonusAmount = AdminSetting::where('key_name', 'welcome_bonus_amount')->value('value_text');
+            $amount = is_numeric($bonusAmount) ? floatval($bonusAmount) : WelcomeBonusClaim::BONUS_AMOUNT;
 
             $claim = WelcomeBonusClaim::create([
                 'user_id' => $user->id,
@@ -147,7 +158,7 @@ class BonusController extends Controller
                 'balance_before' => $balanceBefore,
                 'balance_after' => $balanceBefore + $amount,
                 'status' => 'completed',
-                'note' => 'Welcome Bonus Claim - 1000 BDT',
+                'note' => 'Welcome Bonus Claim - ' . number_format($amount, 2) . ' BDT',
             ]);
         });
         

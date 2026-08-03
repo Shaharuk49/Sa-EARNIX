@@ -95,10 +95,11 @@ a:hover {
 
 .auth-card {
     max-width: 560px;
-    margin: 50px auto;
+    margin: 48px auto;
     border-radius: var(--radius-xl);
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(14px);
+    background: rgba(9, 14, 28, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
 }
 
 .pointer {
@@ -127,6 +128,14 @@ a:hover {
     border: 1px solid var(--bs-primary);
     color: #fff;
     box-shadow: 0 10px 22px rgba(13, 110, 253, 0.24);
+    min-height: 54px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 1rem 1.1rem;
 }
 
 .btn-primary:hover,
@@ -189,20 +198,49 @@ textarea.form-control {
 }
 
 .auth-shell {
-    min-height: calc(100vh - 3rem);
+    min-height: 100vh;
     display: grid;
     place-items: center;
+    padding: 2rem 1rem;
+    background:
+        radial-gradient(circle at 18% 15%, rgba(13, 110, 253, 0.16), transparent 20%),
+        radial-gradient(circle at 85% 10%, rgba(102, 16, 242, 0.14), transparent 18%),
+        linear-gradient(180deg, #05090f 0%, #0f1726 100%);
 }
 
 .auth-header {
-    background:
-        radial-gradient(circle at top right, rgba(13,110,253,0.25), transparent 25%),
-        linear-gradient(135deg, #212529 0%, #0d6efd 100%);
-    padding: 2rem;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.12), rgba(8, 19, 46, 0.94));
+    padding: 2rem 1.75rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-header h1 {
+    font-size: clamp(2rem, 3vw, 2.4rem);
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: rgba(226, 232, 240, 0.72);
+    margin-bottom: 0;
 }
 
 .auth-body {
     padding: 1.75rem;
+    color: rgba(226, 232, 240, 0.88);
+}
+
+.auth-body .text-muted {
+    color: rgba(226, 232, 240, 0.72) !important;
+}
+
+.auth-body a {
+    color: rgba(129, 180, 255, 1);
+}
+
+.auth-body a:hover {
+    color: rgba(204, 233, 255, 1);
+    text-decoration: underline;
 }
 
 .auth-form {
@@ -241,15 +279,21 @@ textarea.form-control {
     min-height: 52px;
     padding-left: 42px;
     border-radius: 14px;
-    border: 1px solid #d0d7e2;
-    background: #fff;
-    transition: border-color .2s ease, box-shadow .2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8fbff;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.auth-control::placeholder {
+    color: rgba(226, 232, 240, 0.55);
 }
 
 .auth-control:focus,
 .auth-select:focus {
-    border-color: rgba(13, 110, 253, 0.6);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.12);
+    border-color: rgba(13, 110, 253, 0.8);
+    box-shadow: 0 0 0 0.22rem rgba(13, 110, 253, 0.18);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .auth-control.with-toggle {
@@ -854,6 +898,184 @@ textarea.form-control {
 ═══════════════════════════════════════════ */
 .user-shell {
     min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(246, 196, 83, 0.14), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.48), transparent 18%),
+                linear-gradient(180deg, #07090f 0%, #111827 100%);
+    color: #e8e6f0;
+}
+
+.user-shell .user-main-wrap {
+    background: transparent;
+}
+
+.user-shell .user-page-content {
+    background: transparent;
+    padding: 2.5rem 1.5rem 4rem;
+}
+
+.user-shell .card,
+.user-shell .profile-form-card,
+.user-shell .profile-referral-banner,
+.user-shell .profile-shortcut-card,
+.user-shell .profile-meta-card,
+.user-shell .stat-card,
+.user-shell .table-responsive,
+.user-shell .offcanvas,
+.user-shell .modal-content {
+    background: rgba(10, 14, 25, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+}
+
+.user-shell .card h5,
+.user-shell .card-title,
+.user-shell .card-body p,
+.user-shell p,
+.user-shell small,
+.user-shell .text-muted {
+    color: #c8cddf;
+}
+
+.user-shell .btn-primary {
+    background: linear-gradient(135deg, #f6c453, #d99f2f);
+    border-color: transparent;
+    color: #111;
+    box-shadow: 0 10px 24px rgba(246, 196, 83, 0.22);
+}
+
+.user-shell .btn-primary:hover {
+    background: linear-gradient(135deg, #d99f2f, #c8871f);
+}
+
+.user-shell .btn-outline-primary {
+    border-color: rgba(246,196,83,0.35);
+    color: #f6c453;
+}
+
+.user-shell .btn-outline-primary:hover {
+    background: rgba(246,196,83,0.1);
+    border-color: rgba(246,196,83,0.5);
+    color: #fff;
+}
+
+.user-shell .badge {
+    background: rgba(255,255,255,0.08);
+    color: #f8f6ef;
+}
+
+.user-shell .badge.bg-success {
+    background: rgba(52,211,153,0.16);
+    color: #bbf7d0;
+}
+
+.user-shell .badge.bg-secondary {
+    background: rgba(148,163,184,0.1);
+    color: #c8d1e0;
+}
+
+.user-shell .alert {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.08);
+    color: #d6d9ec;
+}
+
+.user-shell .form-control,
+.user-shell .form-select,
+.user-shell textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e8e6f0;
+}
+
+.user-shell .form-control::placeholder,
+.user-shell .form-select::placeholder,
+.user-shell textarea::placeholder {
+    color: rgba(232,230,240,0.72);
+}
+
+.user-shell .form-select {
+    color: #e8e6f0;
+}
+
+.user-shell .form-select option {
+    color: #111;
+    background: #f8f9fa;
+}
+
+.user-shell .form-control:focus,
+.user-shell .form-select:focus,
+.user-shell textarea:focus {
+    border-color: rgba(246,196,83,0.45);
+    box-shadow: 0 0 0 0.22rem rgba(246,196,83,0.12);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+
+.user-shell .form-select option {
+    color: #111;
+    background: #f8f9fa;
+}
+
+.user-shell .ratio {
+    background: #050712;
+}
+
+.user-shell .modal-content {
+    border-radius: 24px;
+}
+
+.user-shell .card.rounded-4 {
+    border-radius: 24px;
+}
+
+.user-shell .bg-white,
+.user-shell .bg-light {
+    background: rgba(255,255,255,0.05) !important;
+    color: #e8e6f0 !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+.user-shell .card-footer.bg-white,
+.user-shell .card-footer.bg-light {
+    background: rgba(255,255,255,0.06) !important;
+    border-top: 1px solid rgba(255,255,255,0.08) !important;
+    color: #c8cddf !important;
+}
+
+.user-shell label,
+.user-shell .form-label,
+.user-shell .form-text {
+    color: #d6d9ec !important;
+}
+
+.user-shell .text-secondary,
+.user-shell .text-muted,
+.user-shell .small,
+.user-shell .card-body p,
+.user-shell p {
+    color: #9fa8c6 !important;
+}
+
+.user-shell .card {
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.user-shell .user-nav-link.active {
+    background: linear-gradient(135deg, rgba(246, 196, 83, 0.32), rgba(246, 196, 83, 0.12));
+    border-color: rgba(246, 196, 83, 0.25);
+    color: #fff !important;
+    box-shadow: 0 6px 18px rgba(246, 196, 83, 0.18);
+}
+
+.user-shell .mobile-nav-link:hover,
+.user-shell .mobile-nav-link.active {
+    background: rgba(246, 196, 83, 0.08);
+    color: #f6c453;
+}
+
+.user-shell .user-topbar,
+.user-shell .bottom-nav {
+    background: rgba(8, 12, 24, 0.88);
 }
 
 .user-sidebar {
@@ -864,8 +1086,8 @@ textarea.form-control {
     left: 0;
     bottom: 0;
     z-index: 100;
-    background: radial-gradient(circle at top, rgba(13,110,253,0.18), transparent 18%),
-                linear-gradient(180deg, #212529 0%, #0d1c35 100%);
+    background: radial-gradient(circle at top, rgba(246, 196, 83, 0.22), transparent 18%),
+                linear-gradient(180deg, #111827 0%, #0f172a 100%);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -884,8 +1106,8 @@ textarea.form-control {
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(13,110,253,0.4), rgba(13,110,253,0.15));
-    color: #cfe2ff;
+    background: linear-gradient(135deg, rgba(246,196,83,0.42), rgba(246,196,83,0.16));
+    color: #1a1206;
     flex-shrink: 0;
 }
 
@@ -897,7 +1119,7 @@ textarea.form-control {
 }
 
 .user-brand-sub {
-    color: #7e93b8;
+    color: #e5d8a5;
     font-size: 0.72rem;
 }
 
@@ -1075,6 +1297,25 @@ textarea.form-control {
 .mobile-nav-link.active {
     background: rgba(13,110,253,0.06);
     color: #0d6efd;
+}
+
+.user-shell .mobile-nav-section {
+    color: #9fa8c6;
+}
+
+.user-shell .mobile-nav-link {
+    color: #e8e6f0;
+    border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.user-shell .mobile-nav-link:hover,
+.user-shell .mobile-nav-link.active {
+    background: rgba(255,255,255,0.08);
+    color: #f6c453;
+}
+
+.user-shell .user-topbar-brand {
+    color: #fff;
 }
 
 .mobile-nav-link.text-danger:hover {

@@ -162,6 +162,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('bonus/sections', [AdminBonusController::class, 'storeSection'])->name('bonus.section.store');
         Route::put('bonus/sections/{section}', [AdminBonusController::class, 'updateSection'])->name('bonus.section.update');
         Route::delete('bonus/sections/{section}', [AdminBonusController::class, 'destroySection'])->name('bonus.section.destroy');
+        Route::post('bonus/amount', [AdminBonusController::class, 'updateBonusAmount'])->name('bonus.amount.update');
+        Route::post('bonus/save-all', [AdminBonusController::class, 'saveAll'])->name('bonus.save_all');
         Route::post('bonus/sections/{section}/videos', [AdminBonusController::class, 'storeVideo'])->name('bonus.video.store');
         Route::delete('bonus/videos/{video}', [AdminBonusController::class, 'destroyVideo'])->name('bonus.video.destroy');
         Route::post('bonus/sections/{section}/rules', [AdminBonusController::class, 'storeRule'])->name('bonus.rule.store');
