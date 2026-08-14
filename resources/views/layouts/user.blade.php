@@ -22,12 +22,10 @@
         {{-- Brand --}}
         <div class="user-sidebar-brand">
             <div class="d-flex align-items-center gap-2">
-                <div class="user-brand-badge">
-                    <i class="fas fa-network-wired"></i>
-                </div>
+                <img class="site-logo" src="{{ asset('images/logo.png') }}" alt="SA EarniX" style="height:48px;">
                 <div>
-                    <p class="user-brand-title mb-0">SA EarniX</p>
-                    <p class="user-brand-sub mb-0">Member Panel</p>
+                    <p class="user-brand-title mb-0">Member Panel</p>
+                    <p class="user-brand-sub mb-0">Welcome</p>
                 </div>
             </div>
         </div>
@@ -159,8 +157,9 @@
 
         {{-- Mobile topbar --}}
         <header class="user-topbar d-lg-none">
-            <a class="user-topbar-brand" href="{{ route('user.home') }}">
-                <i class="fas fa-network-wired me-2"></i>SA EarniX
+            <a class="user-topbar-brand d-flex align-items-center gap-2" href="{{ route('user.home') }}">
+                <img class="site-logo" src="{{ asset('images/logo.png') }}" alt="SA EarniX" style="height:36px;">
+                <span class="fw-semibold">SA EarniX</span>
             </a>
             <div class="d-flex align-items-center gap-2">
                 <span class="small text-muted">{{ auth()->user()->name ?? '' }}</span>
@@ -212,7 +211,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" style="width:280px;max-width:85vw">
         <div class="offcanvas-header border-0" style="background:linear-gradient(135deg,#212529,#0d6efd)">
             <div class="d-flex align-items-center gap-2">
-                <i class="fas fa-network-wired text-white"></i>
+                <img class="site-logo" src="{{ asset('images/logo.png') }}" alt="SA EarniX" style="height:36px;">
                 <span class="fw-bold text-white">SA EarniX</span>
             </div>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>

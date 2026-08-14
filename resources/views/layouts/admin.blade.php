@@ -12,6 +12,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        /* site logo styling for admin layout */
+        .site-logo{ background:transparent; border-radius:6px; padding:4px; box-shadow:0 6px 18px rgba(0,0,0,0.12); object-fit:contain; display:inline-block; }
+        .site-logo.admin-small{ height:40px; }
+
         :root { --admin-primary: #1e3a8a; --admin-dark: #0f172a; --sidebar-w: 260px; }
         html, body {
             min-height: 100%;
@@ -113,11 +117,9 @@
     <div class="admin-sidebar-shell">
         <div class="sidebar-brand admin-sidebar-brand">
             <div class="d-flex align-items-center gap-3">
-                <span class="admin-brand-badge">
-                    <i class="fas fa-crown"></i>
-                </span>
+                <img class="site-logo admin-small" src="{{ asset('images/logo.png') }}" alt="SA EarniX Admin">
                 <div>
-                    <h5 class="admin-brand-title">SA EarniX Admin</h5>
+                    <h5 class="admin-brand-title">Admin Console</h5>
                     <small class="admin-brand-text">Control center for users, payments, and content</small>
                 </div>
             </div>

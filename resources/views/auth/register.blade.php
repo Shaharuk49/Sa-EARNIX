@@ -8,8 +8,7 @@
             <i class="fas fa-arrow-left"></i>
         </a>
         <div class="pay-brand">
-            <span class="pay-brand-mark">SA</span>
-            <span class="pay-brand-name">EarniX</span>
+            <img class="site-logo pay-small" src="{{ asset('images/logo.png') }}" alt="SA EarniX">
         </div>
         <span class="pay-topbar-spacer"></span>
     </div>
@@ -21,7 +20,7 @@
                 <i class="fas fa-sparkles"></i>
                 New member onboarding
             </div>
-            <h1>MLM Platform</h1>
+            <h1>রেজিস্ট্রেশন</h1>
             <p class="pay-subtitle">নতুন Account তৈরি করুন</p>
         </div>
 

@@ -10,11 +10,11 @@ use App\Models\WalletTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+
 
 class WithdrawController extends Controller
 {
-    private const MIN_WITHDRAW = 500;
+    private const MIN_WITHDRAW = 10;
 
     public function index()
     {
@@ -38,15 +38,11 @@ class WithdrawController extends Controller
             'amount'              => 'required|numeric|min:' . self::MIN_WITHDRAW,
             'withdraw_method_id'  => 'required|exists:withdraw_methods,id',
             'account_number'      => 'required|string|max:30',
-            'transaction_password'=> 'required|string',
         ]);
 
         $user   = Auth::user();
 
-        // Verify transaction password
-        if (!Hash::check($request->transaction_password, $user->transaction_password ?? '')) {
-            return back()->with('error', 'Transaction password is incorrect.')->withInput();
-        }
+        // Transaction password requirement removed (no verification performed)
 
         $wallet = WalletAccount::where('user_id', $user->id)->first();
 

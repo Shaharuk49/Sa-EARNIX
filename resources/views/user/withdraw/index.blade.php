@@ -36,12 +36,13 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold small">Withdraw Amount</label>
-                    <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror"
-                           placeholder="Enter amount" min="500" value="{{ old('amount') }}" required>
+                          <input type="number" name="amount" class="form-control @error('amount') is-invalid @enderror"
+                              placeholder="Enter amount" min="10" value="{{ old('amount') }}" required>
                     @error('amount')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                    <div class="form-text text-muted">Minimum: ৳500</div>
+                    <div class="form-text text-muted">Minimum: ৳10</div>
+                    <div class="form-text text-muted">Withdraw charge 5 tk</div>
                 </div>
 
                 <div class="mb-3">
@@ -69,15 +70,7 @@
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label fw-semibold small">Transaction Password</label>
-                    <input type="password" name="transaction_password"
-                           class="form-control @error('transaction_password') is-invalid @enderror"
-                           placeholder="Enter password" required>
-                    @error('transaction_password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                {{-- Transaction password removed --}}
 
                 <button type="submit" class="btn w-100 text-white fw-bold py-2"
                         style="background: linear-gradient(135deg, #ef4444, #f87171); border-radius:10px;">

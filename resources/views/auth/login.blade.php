@@ -3,10 +3,13 @@
 
 @section('content')
 <div class="auth-card mx-auto my-4" data-reveal>
-    <div class="auth-header">
+        <div class="auth-header">
         <div class="auth-kicker mb-3">
             <i class="fas fa-shield-halved"></i>
             Secure member access
+        </div>
+        <div style="text-align:center; margin-bottom:8px;">
+            <img class="site-logo auth-large" src="{{ asset('images/logo.png') }}" alt="SA EarniX">
         </div>
         <h1>SA EarniX</h1>
         <p>Login to your account dashboard</p>
