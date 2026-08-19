@@ -16,7 +16,6 @@
         .site-logo{ background:transparent; border-radius:6px; padding:4px; box-shadow:0 6px 18px rgba(0,0,0,0.12); object-fit:contain; display:inline-block; }
         .site-logo.admin-small{ height:40px; }
 
-        :root { --admin-primary: #1e3a8a; --admin-dark: #0f172a; --sidebar-w: 260px; }
         html, body {
             min-height: 100%;
         }

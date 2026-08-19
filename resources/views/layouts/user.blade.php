@@ -209,7 +209,7 @@
          MOBILE OFFCANVAS MENU
     ══════════════════════════════════ --}}
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" style="width:280px;max-width:85vw">
-        <div class="offcanvas-header border-0" style="background:linear-gradient(135deg,#212529,#0d6efd)">
+        <div class="offcanvas-header border-0 theme-gradient-sidebar">
             <div class="d-flex align-items-center gap-2">
                 <img class="site-logo" src="{{ asset('images/logo.png') }}" alt="SA EarniX" style="height:36px;">
                 <span class="fw-bold text-white">SA EarniX</span>

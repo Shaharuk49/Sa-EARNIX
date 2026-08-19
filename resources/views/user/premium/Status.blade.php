@@ -47,7 +47,7 @@
 
     .ps-btn-gold {
         display: block; width: 100%;
-        background: linear-gradient(135deg, #f6c453, #e0a520);
+        background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         border: none; color: #1a1206 !important; font-weight: 700; font-size: 1rem;
         padding: 0.85rem; border-radius: 14px; text-decoration: none;
         box-shadow: 0 10px 24px rgba(240,180,41,0.2); margin-bottom: 0.75rem;

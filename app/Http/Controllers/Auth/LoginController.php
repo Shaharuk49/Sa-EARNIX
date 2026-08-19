@@ -28,6 +28,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $user = Auth::user();
 
+            if ($user->banned_at) {
+                Auth::logout();
+                return back()->withErrors([
+                    'username' => 'এই account টি admin দ্বারা banned করা হয়েছে।'
+                ])->withInput();
+            }
+
             if (!$user->is_active) {
                 Auth::logout();
                 return back()->withErrors([

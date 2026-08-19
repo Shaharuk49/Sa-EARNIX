@@ -65,7 +65,7 @@
         --pay-panel: #171d2c;
         --pay-panel-alt: #1b2233;
         --pay-border: rgba(255,255,255,.08);
-        --pay-gold: #f0b429;
+        --pay-gold: var(--theme-accent-light);
         --pay-gold-soft: #e0a51e;
         --pay-text: #f4f6fb;
         --pay-text-dim: #93a0b8;

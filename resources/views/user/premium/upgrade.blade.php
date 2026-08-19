@@ -20,7 +20,7 @@
         gap: 0.4rem;
         background: rgba(240,180,41,0.08);
         border: 1px solid rgba(240,180,41,0.25);
-        color: #f0b429;
+        color: var(--theme-accent-light);
         font-size: 0.85rem;
         padding: 0.4rem 1rem;
         border-radius: 999px;
@@ -34,7 +34,7 @@
         height: 56px;
         margin: 0 auto 1rem;
         border-radius: 16px;
-        background: linear-gradient(135deg, #f0b429, #c9861a);
+        background: linear-gradient(135deg, var(--theme-accent-light), var(--theme-accent-deep));
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,13 +67,13 @@
         color: #cfcbe0;
         margin-bottom: 1.5rem;
     }
-    .premium-info i { color: #f0b429; margin-top: 0.15rem; }
+    .premium-info i { color: var(--theme-accent-light); margin-top: 0.15rem; }
 
     .premium-section-label {
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: #f0b429;
+        color: var(--theme-accent-light);
         font-weight: 700;
         margin: 0 0.1rem 0.6rem;
         display: flex;
@@ -102,7 +102,7 @@
         width: 42px;
         height: 42px;
         border-radius: 12px;
-        background: linear-gradient(135deg, #f0b429, #c9861a);
+        background: linear-gradient(135deg, var(--theme-accent-light), var(--theme-accent-deep));
         display: flex;
         align-items: center;
         justify-content: center;
@@ -116,7 +116,7 @@
     .payment-copy-btn {
         background: rgba(240,180,41,0.12);
         border: 1px solid rgba(240,180,41,0.3);
-        color: #f0b429;
+        color: var(--theme-accent-light);
         font-size: 0.8rem;
         font-weight: 600;
         padding: 0.4rem 0.85rem;
@@ -157,7 +157,7 @@
 
     .premium-pay-btn {
         width: 100%;
-        background: linear-gradient(135deg, #f6c453, #e0a520);
+        background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         border: none;
         color: #1a1206;
         font-weight: 700;
@@ -189,7 +189,7 @@
         color: #9a97ad;
         margin-top: 1.25rem;
     }
-    .premium-secure-note i { color: #f0b429; margin-top: 0.15rem; }
+    .premium-secure-note i { color: var(--theme-accent-light); margin-top: 0.15rem; }
 
     .premium-errors {
         background: rgba(239,68,68,0.1);

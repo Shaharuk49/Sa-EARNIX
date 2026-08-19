@@ -9,6 +9,7 @@ use App\Models\WithdrawRequest;
 use App\Models\WalletTransaction;
 use App\Models\ReferralCommission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
@@ -30,10 +31,30 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard', compact('stats', 'recentUsers', 'pendingWithdraws'));
     }
 
-    public function users()
+    public function users(Request $request)
     {
-        $users = User::withCount('directReferrals as referral_count')->latest()->paginate(30);
-        return view('admin.users.index', compact('users'));
+        $status = $request->string('status')->toString();
+
+        $usersQuery = User::withCount('directReferrals as referral_count')->latest();
+
+        if ($status === 'banned') {
+            $usersQuery->whereNotNull('banned_at');
+        } elseif ($status === 'unbanned') {
+            $usersQuery->whereNull('banned_at');
+        }
+
+        $users = $usersQuery->paginate(30)->withQueryString();
+
+        return view('admin.users.index', compact('users', 'status'));
+    }
+
+    public function toggleBan(User $user)
+    {
+        $user->update([
+            'banned_at' => $user->banned_at ? null : now(),
+        ]);
+
+        return back()->with('success', $user->banned_at ? 'User banned successfully.' : 'User unbanned successfully.');
     }
 
     public function showUser(User $user)

@@ -27,6 +27,7 @@ class User extends Authenticatable
         'joined_at',
         'last_login_at',
         'activated_at',
+        'banned_at',
     ];
 
     protected $hidden = ['password', 'remember_token', 'transaction_password'];
@@ -37,6 +38,7 @@ class User extends Authenticatable
         'joined_at'    => 'datetime',
         'last_login_at'=> 'datetime',
         'activated_at' => 'datetime',
+        'banned_at'    => 'datetime',
     ];
 
     protected static function boot()

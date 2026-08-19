@@ -3,12 +3,51 @@
 @section('page-title', 'Referral Commission (24 Generations)')
 
 @section('content')
+<style>
+    .commission-card-header {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .commission-card-title {
+        min-width: 0;
+    }
+
+    .commission-total {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .commission-grid .form-control {
+        min-width: 0;
+    }
+
+    @media (max-width: 575.98px) {
+        .commission-grid > div {
+            width: 100%;
+        }
+
+        .commission-actions {
+            align-items: stretch !important;
+            flex-direction: column;
+        }
+
+        .commission-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
 <div class="card border-0 shadow-sm">
-    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-        <span class="fw-semibold">Set Commission Per Generation</span>
-        <span class="badge bg-{{ $total <= 220 ? 'success' : 'danger' }} fs-6">Total: ৳{{ number_format($total, 2) }} / 220 BDT</span>
+    <div class="card-header bg-white d-flex justify-content-between align-items-center commission-card-header">
+        <span class="fw-semibold commission-card-title">Set Commission Per Generation</span>
+        <span class="badge bg-{{ $total <= 220 ? 'success' : 'danger' }} fs-6 commission-total">Total: ৳{{ number_format($total, 2) }} / 220 BDT</span>
     </div>
     <div class="card-body">
+        @if($errors->any())
+            <div class="alert alert-danger small mb-4">
+                {{ $errors->first() }}
+            </div>
+        @endif
         <div class="alert alert-info small mb-4">
             <i class="fas fa-info-circle me-2"></i>
             Registration fee = 250 BDT. Total commission = 220 BDT. Company profit = 30 BDT.
@@ -16,7 +55,7 @@
         </div>
         <form method="POST" action="{{ route('admin.commissions.update') }}">
             @csrf
-            <div class="row g-2">
+            <div class="row g-2 commission-grid">
                 @foreach($commissions as $comm)
                 <div class="col-6 col-md-3 col-lg-2">
                     <label class="form-label small fw-semibold mb-1">Gen {{ $comm->generation_number }}</label>
@@ -28,7 +67,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="mt-4 d-flex gap-2 align-items-center">
+            <div class="mt-4 d-flex gap-2 align-items-center commission-actions">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save me-2"></i>Save Commission Rates
                 </button>

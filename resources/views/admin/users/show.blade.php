@@ -11,6 +11,12 @@
     <a href="{{ route('admin.users.index') }}" class="btn btn-outline-primary btn-sm">
         <i class="fas fa-arrow-left me-1"></i>Back to Users
     </a>
+    <form method="POST" action="{{ route('admin.users.toggle-ban', $user) }}" class="ms-2">
+        @csrf
+        <button type="submit" class="btn btn-sm {{ $user->banned_at ? 'btn-outline-success' : 'btn-danger' }}">
+            {{ $user->banned_at ? 'Unban User' : 'Ban User' }}
+        </button>
+    </form>
 </div>
 
 <div class="row g-3 mb-4">
@@ -66,6 +72,11 @@
                     @endif
                     @if($user->is_premium)
                         <span class="badge bg-warning text-dark">Premium</span>
+                    @endif
+                    @if($user->banned_at)
+                        <span class="badge bg-danger">Banned</span>
+                    @else
+                        <span class="badge bg-success">Unbanned</span>
                     @endif
                 </div>
                 <div class="mb-2"><strong>Joined At:</strong> {{ optional($user->joined_at)->format('d M Y h:i A') ?? '—' }}</div>

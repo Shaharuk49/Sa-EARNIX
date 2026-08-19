@@ -10,22 +10,10 @@
     --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
 }
 @import "bootstrap/dist/css/bootstrap.min.css";
+@import "./theme.css";
 
 :root {
-    --brand-navy: #212529;
-    --brand-blue: var(--bs-primary);
-    --brand-sky: #0a58ca;
-    --brand-gold: var(--bs-primary);
-    --brand-cream: #f8f9fa;
-    --brand-ink: #212529;
-    --brand-muted: #6c757d;
-    --surface: #ffffff;
     --surface-soft: rgba(255, 255, 255, 0.72);
-    --shadow-soft: 0 18px 55px rgba(13, 110, 253, 0.10);
-    --shadow-card: 0 12px 35px rgba(33, 37, 41, 0.08);
-    --radius-xl: 28px;
-    --radius-lg: 20px;
-    --radius-md: 16px;
 }
 
 html {
@@ -35,9 +23,9 @@ html {
 body {
     min-height: 100vh;
     background:
-        radial-gradient(circle at top left, rgba(13, 110, 253, 0.12), transparent 32%),
+        radial-gradient(circle at top left, rgba(var(--theme-primary-rgb), 0.12), transparent 32%),
         radial-gradient(circle at top right, rgba(108, 117, 125, 0.08), transparent 24%),
-        linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        linear-gradient(180deg, var(--theme-cream) 0%, var(--theme-surface) 100%);
     color: var(--brand-ink);
     font-family: 'Manrope', sans-serif;
 }
@@ -127,7 +115,7 @@ a:hover {
     background: var(--bs-primary);
     border: 1px solid var(--bs-primary);
     color: #fff;
-    box-shadow: 0 10px 22px rgba(13, 110, 253, 0.24);
+    box-shadow: 0 10px 22px rgba(var(--theme-primary-rgb), 0.24);
     min-height: 54px;
     font-size: 1rem;
     font-weight: 700;
@@ -140,8 +128,8 @@ a:hover {
 
 .btn-primary:hover,
 .btn-auth:hover {
-    background: #0b5ed7;
-    border-color: #0a58ca;
+    background: var(--theme-primary-dark);
+    border-color: var(--theme-primary-darker);
     color: #fff;
 }
 
@@ -168,8 +156,8 @@ textarea {
 .form-control:focus,
 .form-select:focus,
 textarea:focus {
-    border-color: rgba(13, 110, 253, 0.6);
-    box-shadow: 0 0 0 0.22rem rgba(13, 110, 253, 0.15);
+    border-color: rgba(var(--theme-primary-rgb), 0.6);
+    box-shadow: 0 0 0 0.22rem rgba(var(--theme-primary-rgb), 0.15);
 }
 
 textarea.form-control {
@@ -203,9 +191,9 @@ textarea.form-control {
     place-items: center;
     padding: 2rem 1rem;
     background:
-        radial-gradient(circle at 18% 15%, rgba(13, 110, 253, 0.04), transparent 20%),
+        radial-gradient(circle at 18% 15%, rgba(var(--theme-primary-rgb), 0.04), transparent 20%),
         radial-gradient(circle at 85% 10%, rgba(102, 16, 242, 0.03), transparent 18%),
-        linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        linear-gradient(180deg, var(--theme-cream) 0%, var(--theme-surface) 100%);
 }
 
 .auth-header {
@@ -292,8 +280,8 @@ textarea.form-control {
 
 .auth-control:focus,
 .auth-select:focus {
-    border-color: rgba(13, 110, 253, 0.8);
-    box-shadow: 0 0 0 0.22rem rgba(13, 110, 253, 0.18);
+    border-color: rgba(var(--theme-primary-rgb), 0.8);
+    box-shadow: 0 0 0 0.22rem rgba(var(--theme-primary-rgb), 0.18);
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -316,7 +304,7 @@ textarea.form-control {
 
 .auth-toggle-pass:hover {
     background: #eef2f6;
-    color: #0d6efd;
+    color: var(--theme-primary);
 }
 
 .auth-kicker {
@@ -333,7 +321,7 @@ textarea.form-control {
 .auth-stepper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background: linear-gradient(180deg, #f7fbff 0%, #eff5fb 100%);
+    background: linear-gradient(180deg, var(--theme-cream) 0%, #eff5fb 100%);
     border-bottom: 1px solid rgba(17, 61, 122, 0.08);
 }
 
@@ -356,7 +344,7 @@ textarea.form-control {
     height: 30px;
     line-height: 30px;
     background: var(--bs-primary);
-    box-shadow: 0 8px 16px rgba(13, 110, 253, 0.25);
+    box-shadow: 0 8px 16px rgba(var(--theme-primary-rgb), 0.25);
 }
 
 .glass-panel {
@@ -379,7 +367,7 @@ textarea.form-control {
     width: 240px;
     height: 240px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(13, 110, 253, 0.22), transparent 65%);
+    background: radial-gradient(circle, rgba(var(--theme-primary-rgb), 0.22), transparent 65%);
     right: -40px;
     top: -40px;
 }
@@ -410,7 +398,7 @@ textarea.form-control {
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: rgba(13, 110, 253, 0.10);
+    background: rgba(var(--theme-primary-rgb), 0.10);
     color: var(--brand-blue);
 }
 
@@ -423,8 +411,8 @@ textarea.form-control {
     border-radius: 16px;
     text-decoration: none;
     color: var(--brand-blue);
-    background: rgba(13, 110, 253, 0.05);
-    border: 1px solid rgba(13, 110, 253, 0.18);
+    background: rgba(var(--theme-primary-rgb), 0.05);
+    border: 1px solid rgba(var(--theme-primary-rgb), 0.18);
     font-weight: 700;
 }
 
@@ -435,8 +423,8 @@ textarea.form-control {
 
 .sidebar {
     background:
-    radial-gradient(circle at top, rgba(13, 110, 253, 0.18), transparent 18%),
-    linear-gradient(180deg, #212529 0%, #0d6efd 100%) !important;
+    radial-gradient(circle at top, rgba(var(--theme-primary-rgb), 0.18), transparent 18%),
+    linear-gradient(180deg, var(--theme-navy) 0%, var(--theme-primary) 100%) !important;
 }
 
 .admin-sidebar-shell {
@@ -458,9 +446,9 @@ textarea.form-control {
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(13,110,253,0.24), rgba(13,110,253,0.08));
+    background: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.24), rgba(var(--theme-primary-rgb), 0.08));
     color: #cfe2ff;
-    box-shadow: 0 10px 24px rgba(13, 110, 253, 0.16);
+    box-shadow: 0 10px 24px rgba(var(--theme-primary-rgb), 0.16);
 }
 
 .admin-brand-title {
@@ -550,7 +538,7 @@ textarea.form-control {
 }
 
 .admin-nav-link.active {
-    background: linear-gradient(135deg, rgba(13,110,253,0.28), rgba(13,110,253,0.15)) !important;
+    background: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.28), rgba(var(--theme-primary-rgb), 0.15)) !important;
     border-color: rgba(255,255,255,0.1);
     color: #fff !important;
     border-right: none !important;
@@ -653,7 +641,7 @@ textarea.form-control {
 }
 
 .admin-logout-button:hover {
-    background: linear-gradient(135deg, rgba(13,110,253,0.25), rgba(13,110,253,0.10));
+    background: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.25), rgba(var(--theme-primary-rgb), 0.10));
     color: #fff;
 }
 
@@ -705,7 +693,7 @@ textarea.form-control {
 }
 
 .profile-sidebar {
-    background: linear-gradient(180deg, #212529, #0d6efd);
+    background: linear-gradient(180deg, var(--theme-navy), var(--theme-primary));
     color: #ffffff;
     padding: 30px 24px;
     display: flex;
@@ -899,10 +887,10 @@ textarea.form-control {
 ═══════════════════════════════════════════ */
 .user-shell {
     min-height: 100vh;
-    background: radial-gradient(circle at top left, rgba(246, 196, 83, 0.14), transparent 22%),
+    background: radial-gradient(circle at top left, rgba(var(--theme-accent-rgb), 0.14), transparent 22%),
                 radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.48), transparent 18%),
-                linear-gradient(180deg, #07090f 0%, #111827 100%);
-    color: #e8e6f0;
+                linear-gradient(180deg, var(--theme-dark-bg) 0%, var(--theme-dark-bg-mid) 100%);
+    color: var(--theme-dark-text);
 }
 
 .user-shell .user-main-wrap {
@@ -938,24 +926,24 @@ textarea.form-control {
 }
 
 .user-shell .btn-primary {
-    background: linear-gradient(135deg, #f6c453, #d99f2f);
+    background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-dark));
     border-color: transparent;
     color: #111;
-    box-shadow: 0 10px 24px rgba(246, 196, 83, 0.22);
+    box-shadow: 0 10px 24px rgba(var(--theme-accent-rgb), 0.22);
 }
 
 .user-shell .btn-primary:hover {
-    background: linear-gradient(135deg, #d99f2f, #c8871f);
+    background: linear-gradient(135deg, var(--theme-accent-dark), var(--theme-accent-darker));
 }
 
 .user-shell .btn-outline-primary {
-    border-color: rgba(246,196,83,0.35);
-    color: #f6c453;
+    border-color: rgba(var(--theme-accent-rgb), 0.35);
+    color: var(--theme-accent);
 }
 
 .user-shell .btn-outline-primary:hover {
-    background: rgba(246,196,83,0.1);
-    border-color: rgba(246,196,83,0.5);
+    background: rgba(var(--theme-accent-rgb), 0.1);
+    border-color: rgba(var(--theme-accent-rgb), 0.5);
     color: #fff;
 }
 
@@ -1006,8 +994,8 @@ textarea.form-control {
 .user-shell .form-control:focus,
 .user-shell .form-select:focus,
 .user-shell textarea:focus {
-    border-color: rgba(246,196,83,0.45);
-    box-shadow: 0 0 0 0.22rem rgba(246,196,83,0.12);
+    border-color: rgba(var(--theme-accent-rgb), 0.45);
+    box-shadow: 0 0 0 0.22rem rgba(var(--theme-accent-rgb), 0.12);
     background: rgba(255,255,255,0.08);
     color: #fff;
 }
@@ -1062,21 +1050,21 @@ textarea.form-control {
 }
 
 .user-shell .user-nav-link.active {
-    background: linear-gradient(135deg, rgba(246, 196, 83, 0.32), rgba(246, 196, 83, 0.12));
-    border-color: rgba(246, 196, 83, 0.25);
+    background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.32), rgba(var(--theme-accent-rgb), 0.12));
+    border-color: rgba(var(--theme-accent-rgb), 0.25);
     color: #fff !important;
-    box-shadow: 0 6px 18px rgba(246, 196, 83, 0.18);
+    box-shadow: 0 6px 18px rgba(var(--theme-accent-rgb), 0.18);
 }
 
 .user-shell .mobile-nav-link:hover,
 .user-shell .mobile-nav-link.active {
-    background: rgba(246, 196, 83, 0.08);
-    color: #f6c453;
+    background: rgba(var(--theme-accent-rgb), 0.08);
+    color: var(--theme-accent);
 }
 
 .user-shell .user-topbar,
 .user-shell .bottom-nav {
-    background: rgba(8, 12, 24, 0.88);
+    background: var(--theme-dark-topbar);
 }
 
 .user-sidebar {
@@ -1087,8 +1075,8 @@ textarea.form-control {
     left: 0;
     bottom: 0;
     z-index: 100;
-    background: radial-gradient(circle at top, rgba(246, 196, 83, 0.22), transparent 18%),
-                linear-gradient(180deg, #111827 0%, #0f172a 100%);
+    background: radial-gradient(circle at top, rgba(var(--theme-accent-rgb), 0.22), transparent 18%),
+                linear-gradient(180deg, var(--theme-dark-bg-mid) 0%, var(--theme-dark-bg-deep) 100%);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1107,7 +1095,7 @@ textarea.form-control {
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-    background: linear-gradient(135deg, rgba(246,196,83,0.42), rgba(246,196,83,0.16));
+    background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.42), rgba(var(--theme-accent-rgb), 0.16));
     color: #1a1206;
     flex-shrink: 0;
 }
@@ -1134,8 +1122,8 @@ textarea.form-control {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background: rgba(13,110,253,0.25);
-    border: 1px solid rgba(13,110,253,0.4);
+    background: rgba(var(--theme-primary-rgb), 0.25);
+    border: 1px solid rgba(var(--theme-primary-rgb), 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1185,10 +1173,10 @@ textarea.form-control {
 }
 
 .user-nav-link.active {
-    background: linear-gradient(135deg, rgba(13,110,253,0.32), rgba(13,110,253,0.16));
-    border-color: rgba(13,110,253,0.3);
+    background: linear-gradient(135deg, rgba(var(--theme-primary-rgb), 0.32), rgba(var(--theme-primary-rgb), 0.16));
+    border-color: rgba(var(--theme-primary-rgb), 0.3);
     color: #fff !important;
-    box-shadow: 0 6px 18px rgba(13,110,253,0.18);
+    box-shadow: 0 6px 18px rgba(var(--theme-primary-rgb), 0.18);
 }
 
 .user-nav-icon {
@@ -1265,7 +1253,7 @@ textarea.form-control {
 
 .user-topbar-brand {
     font-weight: 800;
-    color: #212529;
+    color: var(--theme-navy);
     text-decoration: none;
     font-size: 1.05rem;
     font-family: 'Space Grotesk', sans-serif;
@@ -1286,7 +1274,7 @@ textarea.form-control {
     align-items: center;
     gap: 10px;
     padding: 11px 16px;
-    color: #212529;
+    color: var(--theme-navy);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 600;
@@ -1296,8 +1284,8 @@ textarea.form-control {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-    background: rgba(13,110,253,0.06);
-    color: #0d6efd;
+    background: rgba(var(--theme-primary-rgb), 0.06);
+    color: var(--theme-primary);
 }
 
 .user-shell .mobile-nav-section {
@@ -1312,7 +1300,7 @@ textarea.form-control {
 .user-shell .mobile-nav-link:hover,
 .user-shell .mobile-nav-link.active {
     background: rgba(255,255,255,0.08);
-    color: #f6c453;
+    color: var(--theme-accent);
 }
 
 .user-shell .user-topbar-brand {

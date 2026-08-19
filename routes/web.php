@@ -29,7 +29,7 @@ Route::middleware('guest')->group(function () {
 // Registration pending approval page (no auth needed)
 Route::get('register/pending', fn() => view('auth.registration-pending'))->name('registration.pending');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'not.banned'])->group(function () {
     Route::get('home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
     Route::get('personal-info', [App\Http\Controllers\User\HomeController::class, 'personalInfo'])->name('user.personal-info');
     Route::post('personal-info', [App\Http\Controllers\User\HomeController::class, 'updatePersonalInfo'])->name('user.personal-info.update');
@@ -140,6 +140,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Dashboard
         Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('users', [AdminDashboardController::class, 'users'])->name('users.index');
+        Route::post('users/{user}/toggle-ban', [AdminDashboardController::class, 'toggleBan'])->name('users.toggle-ban');
         Route::get('users/{user}', [AdminDashboardController::class, 'showUser'])->name('users.show');
 
         // Commission (24-gen)

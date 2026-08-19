@@ -1,0 +1,91 @@
+/**
+ * SA EarniX — Global theme colors
+ * ─────────────────────────────────
+ * Change ONLY the values in this file to update colors across every page
+ * (user panel, admin, auth, login, register, premium, home, etc.)
+ */
+
+:root {
+    /* Primary — buttons, links, admin sidebar, auth pages */
+    --theme-primary: #0d6efd;
+    --theme-primary-dark: #0b5ed7;
+    --theme-primary-darker: #0a58ca;
+    --theme-primary-rgb: 13, 110, 253;
+
+    /* Accent — gold highlights on user/dark pages */
+    --theme-accent: #f6c453;
+    --theme-accent-mid: #e0a520;
+    --theme-accent-dark: #d99f2f;
+    --theme-accent-darker: #c8871f;
+    --theme-accent-deep: #c9861a;
+    --theme-accent-light: #f0b429;
+    --theme-accent-rgb: 246, 196, 83;
+    --theme-accent-light-rgb: 240, 180, 41;
+
+    /* Neutrals */
+    --theme-navy: #212529;
+    --theme-navy-rgb: 33, 37, 41;
+    --theme-ink: #212529;
+    --theme-muted: #6c757d;
+    --theme-cream: #f8f9fa;
+    --theme-surface: #ffffff;
+    --theme-page-bg: #f4f7fb;
+
+    /* User dark theme */
+    --theme-dark-bg: #07090f;
+    --theme-dark-bg-mid: #111827;
+    --theme-dark-bg-deep: #0f172a;
+    --theme-dark-card: #14141f;
+    --theme-dark-page: #0a0a14;
+    --theme-dark-input: #191926;
+    --theme-dark-text: #e8e6f0;
+    --theme-dark-text-soft: #cfcbe0;
+    --theme-dark-text-muted: #9fa8c6;
+    --theme-dark-text-dim: #8b889c;
+    --theme-dark-topbar: rgba(8, 12, 24, 0.88);
+
+    /* Bootstrap bridge */
+    --bs-primary: var(--theme-primary);
+    --bs-primary-rgb: var(--theme-primary-rgb);
+
+    /* Legacy aliases (used in app.css) */
+    --brand-navy: var(--theme-navy);
+    --brand-blue: var(--theme-primary);
+    --brand-sky: var(--theme-primary-darker);
+    --brand-gold: var(--theme-accent);
+    --brand-cream: var(--theme-cream);
+    --brand-ink: var(--theme-ink);
+    --brand-muted: var(--theme-muted);
+    --surface: var(--theme-surface);
+
+    /* Layout tokens */
+    --shadow-soft: 0 18px 55px rgba(var(--theme-primary-rgb), 0.10);
+    --shadow-card: 0 12px 35px rgba(var(--theme-navy-rgb), 0.08);
+    --radius-xl: 28px;
+    --radius-lg: 20px;
+    --radius-md: 16px;
+    --sidebar-w: 260px;
+    --admin-dark: var(--theme-dark-bg-deep);
+}
+
+/* Reusable theme utilities */
+.theme-gradient-primary {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-primary-darker));
+}
+
+.theme-gradient-accent {
+    background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
+}
+
+.theme-gradient-sidebar {
+    background: linear-gradient(180deg, var(--theme-navy) 0%, var(--theme-primary) 100%);
+}
+
+.theme-text-accent {
+    color: var(--theme-accent-light);
+}
+
+.theme-bg-dark-page {
+    background: var(--theme-dark-page);
+    color: var(--theme-dark-text);
+}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ReferralCommissionSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminCommissionController extends Controller
 {
@@ -27,9 +28,13 @@ class AdminCommissionController extends Controller
             return back()->with('error', "Total cannot exceed 220 BDT. Current total: {$total} BDT");
         }
 
-        foreach ($request->amounts as $id => $amount) {
-            ReferralCommissionSetting::where('id', $id)->update(['amount' => $amount]);
-        }
+        DB::transaction(function () use ($request) {
+            foreach ($request->input('amounts', []) as $id => $amount) {
+                ReferralCommissionSetting::whereKey($id)->update([
+                    'amount' => (float) $amount,
+                ]);
+            }
+        });
 
         return back()->with('success', "Commission rates updated. Total: {$total} BDT");
     }

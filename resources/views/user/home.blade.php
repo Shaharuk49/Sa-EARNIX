@@ -4,7 +4,7 @@
 
 @section('content')
 <style>
-    .sax-page { background:#0a0a14; min-height:100vh; padding:1.25rem 0 3rem; color:#e8e6f0; }
+    .sax-page { background:var(--theme-dark-page); min-height:100vh; padding:1.25rem 0 3rem; color:var(--theme-dark-text); }
     .sax-page .container { max-width:520px; padding-left:1rem; padding-right:1rem; }
     @media (min-width:576px)  { .sax-page .container { max-width:540px; } }
     @media (min-width:768px)  { .sax-page .container { max-width:700px; } }
@@ -15,7 +15,7 @@
     /* ---- Profile ---- */
     .sax-profile-card {
         position:relative;
-        background:#14141f; border:1px solid rgba(255,255,255,0.06);
+        background:var(--theme-dark-card); border:1px solid rgba(255,255,255,0.06);
         border-radius:20px; padding:1.25rem;
         margin-bottom:1rem;
     }
@@ -39,13 +39,13 @@
     }
     .sax-card-soft-label {
         font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em;
-        color:#f0b429; font-weight:700; margin-bottom:0.15rem;
+        color:var(--theme-accent-light); font-weight:700; margin-bottom:0.15rem;
     }
     .sax-profile-name { color:#f4f2fa; font-weight:700; font-size:1.15rem; margin:0; }
     .sax-profile-meta { font-size:0.82rem; color:#8b889c; display:flex; align-items:center; gap:0.4rem; margin-top:0.2rem; flex-wrap:wrap; }
     .sax-premium-pill {
         display:inline-flex; align-items:center; gap:0.3rem;
-        background:linear-gradient(135deg,#f6c453,#e0a520);
+        background:linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         color:#1a1206; font-size:0.68rem; font-weight:800;
         padding:0.15rem 0.55rem; border-radius:999px;
     }
@@ -55,53 +55,53 @@
         color:#c9c6d8; display:flex; align-items:center; justify-content:center;
         flex-shrink:0;
     }
-    .sax-edit-btn:hover { background:rgba(255,255,255,0.08); color:#f0b429; }
+    .sax-edit-btn:hover { background:rgba(255,255,255,0.08); color:var(--theme-accent-light); }
 
     /* ---- Balance ---- */
     .sax-balance-card {
         position:relative; overflow:hidden;
-        background:linear-gradient(135deg,#2a2110 0%, #1c160c 55%, #14141f 100%);
-        border:1px solid rgba(240,180,41,0.25);
+        background:linear-gradient(135deg,#2a2110 0%, #1c160c 55%, var(--theme-dark-card) 100%);
+        border:1px solid rgba(var(--theme-accent-light-rgb),0.25);
         border-radius:20px; padding:1.5rem;
         margin-bottom:1rem;
     }
     .sax-balance-card::before {
         content:""; position:absolute; inset:-40% -20% auto auto;
         width:260px; height:260px;
-        background:radial-gradient(circle, rgba(240,180,41,0.16), transparent 70%);
+        background:radial-gradient(circle, rgba(var(--theme-accent-light-rgb),0.16), transparent 70%);
         pointer-events:none;
     }
     .sax-eyebrow { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.07em; color:#d8b566; font-weight:700; }
     .sax-balance-figure { font-size:clamp(2.1rem, 4vw, 2.6rem); font-weight:800; color:#fff; margin:0.25rem 0 0.35rem; }
-    .sax-balance-figure .cur { color:#f0b429; font-size:0.6em; font-weight:700; margin-right:0.15rem; }
+    .sax-balance-figure .cur { color:var(--theme-accent-light); font-size:0.6em; font-weight:700; margin-right:0.15rem; }
     .sax-balance-sub { font-size:0.82rem; color:#9a97ad; margin:0; position:relative; z-index:1; }
     .sax-icon-badge {
         width:48px; height:48px; border-radius:14px;
-        background:linear-gradient(135deg,#f6c453,#e0a520);
+        background:linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         display:flex; align-items:center; justify-content:center;
         color:#1a1206; font-size:1.2rem; flex-shrink:0;
-        box-shadow:0 8px 18px rgba(240,180,41,0.25);
+        box-shadow:0 8px 18px rgba(var(--theme-accent-light-rgb),0.25);
     }
     @media (min-width:768px) { .sax-balance-card { padding:2rem; } .sax-icon-badge { width:56px; height:56px; font-size:1.4rem; } }
 
     /* ---- Mini info grid ---- */
     .sax-mini-card {
-        background:#14141f; border:1px solid rgba(255,255,255,0.06);
+        background:var(--theme-dark-card); border:1px solid rgba(255,255,255,0.06);
         border-radius:18px; padding:1.1rem; height:100%;
         transition:border-color .15s ease;
     }
-    .sax-mini-card:hover { border-color:rgba(240,180,41,0.3); }
+    .sax-mini-card:hover { border-color:rgba(var(--theme-accent-light-rgb),0.3); }
     .sax-mini-icon {
         width:38px; height:38px; border-radius:11px;
         display:flex; align-items:center; justify-content:center;
         font-size:1rem; margin-bottom:0.7rem;
     }
     .sax-mini-icon.violet { background:rgba(139,92,246,0.14); color:#a78bfa; }
-    .sax-mini-icon.amber  { background:rgba(240,180,41,0.14); color:#f0b429; }
+    .sax-mini-icon.amber  { background:rgba(var(--theme-accent-light-rgb),0.14); color:var(--theme-accent-light); }
     .sax-mini-icon.green  { background:rgba(74,222,128,0.14); color:#4ade80; }
     .sax-mini-label { font-size:0.72rem; color:#8b889c; font-weight:600; }
     .sax-mini-value { font-size:0.92rem; font-weight:700; color:#e8e6f0; margin-top:0.2rem; }
-    .sax-mini-link { color:#f0b429; font-size:0.85rem; font-weight:700; text-decoration:none; margin-top:0.2rem; display:inline-block; }
+    .sax-mini-link { color:var(--theme-accent-light); font-size:0.85rem; font-weight:700; text-decoration:none; margin-top:0.2rem; display:inline-block; }
     .sax-mini-link:hover { color:#ffce54; }
     .sax-status-pill {
         display:inline-flex; align-items:center; gap:0.3rem;
@@ -113,7 +113,7 @@
 
     /* ---- Generic card ---- */
     .sax-card {
-        background:#14141f; border:1px solid rgba(255,255,255,0.06);
+        background:var(--theme-dark-card); border:1px solid rgba(255,255,255,0.06);
         border-radius:20px; padding:1.35rem;
         margin-bottom:1rem;
     }
@@ -121,12 +121,12 @@
 
     /* ---- Referral ---- */
     .sax-input {
-        background:#191926 !important; border:1px solid rgba(255,255,255,0.08) !important;
-        color:#cfcbe0 !important; border-radius:12px !important; font-size:0.85rem;
+        background:var(--theme-dark-input) !important; border:1px solid rgba(255,255,255,0.08) !important;
+        color:var(--theme-dark-text-soft) !important; border-radius:12px !important; font-size:0.85rem;
         padding:0.65rem 0.9rem;
     }
     .sax-copy-btn {
-        background:linear-gradient(135deg,#f6c453,#e0a520);
+        background:linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         border:none; color:#1a1206; border-radius:12px; font-weight:700;
         padding:0.55rem 1.1rem; white-space:nowrap; flex-shrink:0;
     }
@@ -149,7 +149,7 @@
         color:#fff; font-size:1.35rem; margin:0 auto 0.5rem;
     }
     .sax-official-link .sax-official-label { display:block; font-size:0.72rem; color:#a9a6ba; font-weight:600; line-height:1.2; }
-    .sax-official-link:hover .sax-official-label { color:#f0b429; }
+    .sax-official-link:hover .sax-official-label { color:var(--theme-accent-light); }
     @media (min-width:768px) {
         .sax-official-icon { width:64px; height:64px; font-size:1.5rem; }
         .sax-official-link { width:88px; }
@@ -158,20 +158,20 @@
     /* ---- Premium banner ---- */
     .sax-upsell {
         position:relative; overflow:hidden;
-        background:linear-gradient(135deg, rgba(240,180,41,0.14), rgba(201,134,26,0.08)), #14141f;
-        border:1px solid rgba(240,180,41,0.35);
+        background:linear-gradient(135deg, rgba(var(--theme-accent-light-rgb),0.14), rgba(201,134,26,0.08)), var(--theme-dark-card);
+        border:1px solid rgba(var(--theme-accent-light-rgb),0.35);
         border-radius:20px; padding:2rem;
     }
     .sax-upsell::before {
         content:"\f521"; font-family:"Font Awesome 6 Free"; font-weight:900;
         position:absolute; right:-10px; bottom:-25px; font-size:8rem;
-        color:rgba(240,180,41,0.06);
+        color:rgba(var(--theme-accent-light-rgb),0.06);
     }
     .sax-btn-gold {
-        background:linear-gradient(135deg,#f6c453,#e0a520);
+        background:linear-gradient(135deg, var(--theme-accent), var(--theme-accent-mid));
         border:none; color:#1a1206 !important; font-weight:700;
         border-radius:12px; padding:0.6rem 1.2rem;
-        box-shadow:0 8px 20px rgba(240,180,41,0.2);
+        box-shadow:0 8px 20px rgba(var(--theme-accent-light-rgb),0.2);
     }
     .sax-btn-gold:hover { filter:brightness(1.06); }
 </style>
@@ -297,10 +297,10 @@
                             $bg = 'linear-gradient(135deg,#3a3a44,#1a1a1f)';
                         } elseif (str_contains($titleLc, 'instagram')) {
                             $icon = 'fab fa-instagram';
-                            $bg = 'linear-gradient(135deg,#f0b429,#c4267c 55%,#5b4bb0)';
+                            $bg = 'linear-gradient(135deg, var(--theme-accent-light), #c4267c 55%, #5b4bb0)';
                         } else {
                             $icon = 'fas fa-arrow-up-right-from-square';
-                            $bg = 'linear-gradient(135deg,#f0b429,#c9861a)';
+                            $bg = 'linear-gradient(135deg, var(--theme-accent-light), var(--theme-accent-deep))';
                         }
                     @endphp
                     <a href="{{ $link->url }}" target="_blank" class="sax-official-link">
